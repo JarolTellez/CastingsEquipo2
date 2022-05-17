@@ -25,7 +25,7 @@ public class BuscarCasting extends javax.swing.JPanel {
     {
            this.setSize(1800, 700);// tamano del panel
         this.setLocation(5,5);// posicion dentro del panel principal
-        
+        System.out.println("hola");
        return this;
     }
 
