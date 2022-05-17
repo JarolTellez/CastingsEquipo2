@@ -105,7 +105,7 @@ public class FachadaDatos implements IDatos {
 
     @Override
     public Agente buscarAgenteNombre(String nombre) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return agenteDAO.buscarAgenteNombre(nombre);
     }
 
     @Override

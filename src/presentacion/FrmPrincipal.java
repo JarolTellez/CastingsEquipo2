@@ -63,6 +63,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         panelPrincipal.add(panelAgentes.despliegaPanel(),BorderLayout.CENTER);
         panelPrincipal.revalidate();
         panelPrincipal.repaint();
+        this.setTitle("Registrar Agente");
     }
 
     @SuppressWarnings("unchecked")

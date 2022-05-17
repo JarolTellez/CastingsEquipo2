@@ -12,9 +12,8 @@ import org.bson.types.ObjectId;
  * @author Jarol
  */
 public class Agente {
-    ObjectId id;
-    //int numeroEmpleado;
-    String RFC,CURP,nombre,direccion;
+   private String RFC,CURP,nombre,direccion;
+    private ObjectId id;
 
      
 

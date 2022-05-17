@@ -5,6 +5,8 @@
  */
 package presentacion;
 
+
+        
 import ObjetoNegocio.Agente;
 import org.bson.types.ObjectId;
 import Control.CtrAgente;
@@ -15,6 +17,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -151,7 +154,7 @@ public class PanelAgenteCasting extends javax.swing.JPanel {
         String CURP = txtCURP.getText();
         String RFC = txtRFC.getText();
 
-        Agente agente = new Agente(RFC, CURP, Nombre, Direccion, new ObjectId());
+        Agente agente = new Agente(RFC, CURP, Nombre, Direccion,new ObjectId());
 
         try {
             agente.validarDatos(agente);
