@@ -24,30 +24,29 @@ import static presentacion.FrmPrincipal.panelPrincipal;
  */
 public class PanelTablaCasting extends javax.swing.JPanel {
 
-    
-    PanelPerfil perfil= new PanelPerfil();
-        ILogica logica;
-        Presencial casting = new Presencial();
-        String nombreCliente=null,nombreAgente=null,tipoCasting=null;
+    PanelPerfil perfil = new PanelPerfil();
+    ILogica logica;
+    Presencial casting = new Presencial();
+    String nombreCliente = null, nombreAgente = null, tipoCasting = null;
+
     /**
      * Creates new form TablaCastings
      */
     public PanelTablaCasting() {
         initComponents();
-        logica=dameInstancia();
-         llenarTabla();
+        logica = dameInstancia();
+        llenarTabla();
     }
-    
-public JPanel desplegarPanel()
-{
-     
-        
+
+    public JPanel desplegarPanel() {
+
         this.setSize(1090, 590);// tamano del panel
-        this.setLocation(5,5);// posicion dentro del panel principal
-        
-return this;
-    
-}
+        this.setLocation(5, 5);// posicion dentro del panel principal
+
+        return this;
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -130,14 +129,12 @@ return this;
 
     private void btnRegistrarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarPerfilActionPerformed
         //  aqui falta la condicion para ver si se selecciono un casting
-        try
-        {
-       casting.verificaDatos(nombreCliente,nombreAgente,tipoCasting);
- perfil.recuperarDatos(nombreCliente,nombreAgente,tipoCasting);
- 
-        perfil.desplegarPanel();
-        }catch(RuntimeException ex)
-        {
+        try {
+            perfil.desplegarPanel();
+            //Esto se encarga de llenar los datos de casting en el panel de Perfil.
+            casting.verificaDatos(nombreCliente, nombreAgente, tipoCasting);
+            perfil.recuperarDatos(nombreCliente, nombreAgente, tipoCasting);
+        } catch (RuntimeException ex) {
             mostrarError(ex);
         }
     }//GEN-LAST:event_btnRegistrarPerfilActionPerformed
@@ -147,49 +144,44 @@ return this;
     }//GEN-LAST:event_jScrollPane1MouseClicked
 
     private void tblCastingsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCastingsMouseClicked
-  
-   DefaultTableModel model= (DefaultTableModel) tblCastings.getModel();
-         nombreCliente=model.getValueAt(tblCastings.getSelectedRow(),7 ).toString();
-          nombreAgente=model.getValueAt(tblCastings.getSelectedRow(), 8).toString();
-         tipoCasting=model.getValueAt(tblCastings.getSelectedRow(), 6).toString();        
-        
+
+        DefaultTableModel model = (DefaultTableModel) tblCastings.getModel();
+        nombreCliente = model.getValueAt(tblCastings.getSelectedRow(), 7).toString();
+        nombreAgente = model.getValueAt(tblCastings.getSelectedRow(), 8).toString();
+        tipoCasting = model.getValueAt(tblCastings.getSelectedRow(), 6).toString();
+
     }//GEN-LAST:event_tblCastingsMouseClicked
 
-    
-    
-    public void mostrarError(Exception ex)
-    {
-         JOptionPane.showMessageDialog(this, ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+    public void mostrarError(Exception ex) {
+        JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
-    
-      public void llenarTabla()
-    {
-          List<Presencial> list=logica.consultarTodosCasting();
-        DefaultTableModel model= (DefaultTableModel) tblCastings.getModel();
- 
+
+    public void llenarTabla() {
+        List<Presencial> list = logica.consultarTodosCasting();
+        DefaultTableModel model = (DefaultTableModel) tblCastings.getModel();
+
         int rowCount = model.getRowCount();
-        
-        for(int m=rowCount-1;m>=0;m--)
-        {
-           model.removeRow(m);
+
+        for (int m = rowCount - 1; m >= 0; m--) {
+            model.removeRow(m);
         }
-        
-        Object rowData[]=new Object[9];
-        for(int i=0; i<list.size();i++){
-            rowData[0]=list.get(i).getId();
-            rowData[1]=list.get(i).getNombre();
-            rowData[2]=list.get(i).getDescripcion();
-            rowData[3]=list.get(i).getFecha_contratacion();
-             rowData[4]=list.get(i).getCoste();
-              rowData[5]=list.get(i).getTipo();
-               rowData[6]=list.get(i).getNumPersonas();
-               // aqui solo puse los nombres pero podemos dejar el objeto completo
-                 rowData[7]=list.get(i).getCliente().getNombre();
-                    rowData[8]=list.get(i).getAgente().getNombre();
+
+        Object rowData[] = new Object[9];
+        for (int i = 0; i < list.size(); i++) {
+            rowData[0] = list.get(i).getId();
+            rowData[1] = list.get(i).getNombre();
+            rowData[2] = list.get(i).getDescripcion();
+            rowData[3] = list.get(i).getFecha_contratacion();
+            rowData[4] = list.get(i).getCoste();
+            rowData[5] = list.get(i).getTipo();
+            rowData[6] = list.get(i).getNumPersonas();
+            // aqui solo puse los nombres pero podemos dejar el objeto completo
+            rowData[7] = list.get(i).getCliente().getNombre();
+            rowData[8] = list.get(i).getAgente().getNombre();
             model.addRow(rowData);
         }
-        
-        }
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistrarPerfil;

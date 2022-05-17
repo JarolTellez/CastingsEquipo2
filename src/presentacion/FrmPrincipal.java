@@ -12,55 +12,55 @@ import java.awt.BorderLayout;
  * @author Jarol
  */
 public class FrmPrincipal extends javax.swing.JFrame {
-    PanelCliente panelClientes= new PanelCliente();
-    PanelCasting panelCastings= new PanelCasting();
-    BuscarCasting panelBuscarCastings= new BuscarCasting();
-    PanelPerfil panelPerfil= new PanelPerfil();
+
+    PanelCliente panelClientes = new PanelCliente();
+    PanelCasting panelCastings = new PanelCasting();
+    BuscarCasting panelBuscarCastings = new BuscarCasting();
+    PanelPerfil panelPerfil = new PanelPerfil();
     PanelTablaCasting panelTabla = new PanelTablaCasting();
-    PanelAgenteCasting panelAgentes= new PanelAgenteCasting();
+    PanelAgenteCasting panelAgentes = new PanelAgenteCasting();
 
     public FrmPrincipal() {
-          initComponents();
-          setLocationRelativeTo(null);
-         
+        initComponents();
+        setLocationRelativeTo(null);
+
     }
-    
-    public void despliegaPanelPerfil(){
+
+    public void despliegaPanelPerfil() {
         panelPrincipal.removeAll();
-       panelPrincipal.add(panelTabla.desplegarPanel(),BorderLayout.CENTER);
-       panelPrincipal.revalidate();
-       panelPrincipal.repaint();
-       this.setTitle("Registar Perfil");
+        panelPrincipal.add(panelTabla.desplegarPanel(), BorderLayout.CENTER);
+        panelPrincipal.revalidate();
+        panelPrincipal.repaint();
+        this.setTitle("Registar Perfil");
     }
-    
-    public void despliegaPanelCliente(){
+
+    public void despliegaPanelCliente() {
         panelPrincipal.removeAll();
-        panelPrincipal.add(panelClientes.despliegaPanel(),BorderLayout.CENTER);
+        panelPrincipal.add(panelClientes.despliegaPanel(), BorderLayout.CENTER);
         panelPrincipal.revalidate();
         panelPrincipal.repaint();
         this.setTitle("Registar Cliente");
     }
-    
-    public void despliegaPanelCasting(){
+
+    public void despliegaPanelCasting() {
         panelPrincipal.removeAll();
-        panelPrincipal.add(panelCastings.despliegaPanel(),BorderLayout.CENTER);
+        panelPrincipal.add(panelCastings.despliegaPanel(), BorderLayout.CENTER);
         panelPrincipal.revalidate();
         panelPrincipal.repaint();
         this.setTitle("Registar Casting");
     }
-    
-    public void despliegaPanelBuscar(){
+
+    public void despliegaPanelBuscar() {
         panelPrincipal.removeAll();
-        panelPrincipal.add(panelBuscarCastings.despliegaPanel(),BorderLayout.CENTER);
+        panelPrincipal.add(panelBuscarCastings.despliegaPanel(), BorderLayout.CENTER);
         panelPrincipal.revalidate();
         panelPrincipal.repaint();
         this.setTitle("Buscar Casting");
     }
-    
-    public void despliegaPanelAgente()
-    {
-          panelPrincipal.removeAll();
-        panelPrincipal.add(panelAgentes.despliegaPanel(),BorderLayout.CENTER);
+
+    public void despliegaPanelAgente() {
+        panelPrincipal.removeAll();
+        panelPrincipal.add(panelAgentes.despliegaPanel(), BorderLayout.CENTER);
         panelPrincipal.revalidate();
         panelPrincipal.repaint();
         this.setTitle("Registrar Agente");
@@ -176,28 +176,24 @@ public class FrmPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-  
-      
-  
-    
-    
+
     private void menuRegistrarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRegistrarClienteActionPerformed
-  
+
         despliegaPanelCliente();
-        
+
     }//GEN-LAST:event_menuRegistrarClienteActionPerformed
 
     private void menuRegistrarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRegistrarPerfilActionPerformed
-       despliegaPanelPerfil();
-        
+        despliegaPanelPerfil();
+
     }//GEN-LAST:event_menuRegistrarPerfilActionPerformed
 
     private void menuRegistrarCastingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRegistrarCastingActionPerformed
-      despliegaPanelCasting();
+        despliegaPanelCasting();
     }//GEN-LAST:event_menuRegistrarCastingActionPerformed
 
     private void menuBuscarCastingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuBuscarCastingActionPerformed
-       despliegaPanelBuscar();
+        despliegaPanelBuscar();
     }//GEN-LAST:event_menuBuscarCastingActionPerformed
 
     private void MenuItemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemSalirActionPerformed

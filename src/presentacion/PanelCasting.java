@@ -29,125 +29,108 @@ import static presentacion.FrmPrincipal.panelPrincipal;
  *
  * @author Jarol
  */
-public class PanelCasting extends javax.swing.JPanel { 
-  SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
- DecimalFormat formatoD = new DecimalFormat("#.00");
- List<Fase>fasesAgregadas= new ArrayList();;
- 
- Fase fase= new Fase();
+public class PanelCasting extends javax.swing.JPanel {
 
-     
+    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+    DecimalFormat formatoD = new DecimalFormat("#.00");
+    List<Fase> fasesAgregadas = new ArrayList();
+    ;
+ 
+ Fase fase = new Fase();
+
     /**
      * Creates new form RegistrarCasting
      */
-       ILogica logica;
+    ILogica logica;
+
     public PanelCasting() {
         initComponents();
-           logica=dameInstancia();
-           datePickerFecha.setDateToToday();
+        logica = dameInstancia();
+        datePickerFecha.setDateToToday();
     }
-    
-    public JPanel despliegaPanel()
-    {
-      
-      this.setSize(1800, 700);// tamano del panel
-        this.setLocation(5,5);// posicion dentro del panel principal
-    mostrarListas();
-     llenarTabla();
-       
-       
-       return this;
+
+    public JPanel despliegaPanel() {
+
+        this.setSize(1800, 700);// tamano del panel
+        this.setLocation(5, 5);// posicion dentro del panel principal
+        mostrarListas();
+        llenarTabla();
+
+        return this;
     }
-    
-    
-    public void mostrarListas()
-    {
+
+    public void mostrarListas() {
         comboBoxClientes.removeAllItems();
-         for(int i=0; i< logica.consultarTodosClientes().size();i++)
-        {
-               comboBoxClientes.addItem(logica.consultarTodosClientes().get(i).getNombre());
+        for (int i = 0; i < logica.consultarTodosClientes().size(); i++) {
+            comboBoxClientes.addItem(logica.consultarTodosClientes().get(i).getNombre());
         }
-        
-         
+
     }
- 
-    
-    public int muestraPregunta()
-    {
+
+    public int muestraPregunta() {
         int resp = JOptionPane.showConfirmDialog(null, "¿Esta seguro?", "Alerta!", JOptionPane.YES_NO_OPTION);
         return resp;
     }
-    
-    
-      public void llenarTabla()
-    {
-          List<Presencial> list=logica.consultarTodosCasting();
-        DefaultTableModel model= (DefaultTableModel) tblCastings.getModel();
- 
+
+    public void llenarTabla() {
+        List<Presencial> list = logica.consultarTodosCasting();
+        DefaultTableModel model = (DefaultTableModel) tblCastings.getModel();
+
         int rowCount = model.getRowCount();
-        
-        for(int m=rowCount-1;m>=0;m--)
-        {
-           model.removeRow(m);
+
+        for (int m = rowCount - 1; m >= 0; m--) {
+            model.removeRow(m);
         }
-        
-        Object rowData[]=new Object[7];
-        for(int i=0; i<list.size();i++){
-            rowData[0]=list.get(i).getId();
-            rowData[1]=list.get(i).getNombre();
-            rowData[2]=list.get(i).getDescripcion();
-            rowData[3]=list.get(i).getFecha_contratacion();
-             rowData[4]=list.get(i).getCoste();
-              rowData[5]=list.get(i).getTipo();
-               rowData[6]=list.get(i).getCliente();
+
+        Object rowData[] = new Object[7];
+        for (int i = 0; i < list.size(); i++) {
+            rowData[0] = list.get(i).getId();
+            rowData[1] = list.get(i).getNombre();
+            rowData[2] = list.get(i).getDescripcion();
+            rowData[3] = list.get(i).getFecha_contratacion();
+            rowData[4] = list.get(i).getCoste();
+            rowData[5] = list.get(i).getTipo();
+            rowData[6] = list.get(i).getCliente();
             model.addRow(rowData);
         }
-        
-        }
-      
-      /**
-       * Obtiene las fases del comboBox para mandarlas al momento de agregar
-       * @throws ParseException 
-       */
-      public void obtenerFases() throws ParseException
-      {    
-         
-                
-                SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd"); 
-          if(comboBoxFases.getSelectedItem().toString().isEmpty())
-          {
-    
-          for(int i=0;i<comboBoxFases.countComponents();i++)
-          { 
-            
-              fasesAgregadas.add(new Fase(date.parse(comboBoxFases.getItemAt(i))));
-          }
-          }
-      }
 
-    
-    
-         public void mostrarError(Exception ex)
-    {
-       
-        JOptionPane.showMessageDialog(this, ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
-       
-        
     }
-    
+
     /**
-     * Muestra mensaje de exito y busca el cliente para obtener el id con el que se registro para mostrarlo en el mensaje
-     * @param cliente 
+     * Obtiene las fases del comboBox para mandarlas al momento de agregar
+     *
+     * @throws ParseException
      */
-     public void mostrarMensajeExito(Casting casting)
-    {
-  
-        JOptionPane.showMessageDialog(this, "Registrado con exito Cliente:"+casting.getId().toString() );
-       
-        
+    public void obtenerFases() throws ParseException {
+
+        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+        if (comboBoxFases.getSelectedItem().toString().isEmpty()) {
+
+            for (int i = 0; i < comboBoxFases.countComponents(); i++) {
+
+                fasesAgregadas.add(new Fase(date.parse(comboBoxFases.getItemAt(i))));
+            }
+        }
     }
-    
-    
+
+    public void mostrarError(Exception ex) {
+
+        JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
+    }
+
+    /**
+     * Muestra mensaje de exito y busca el cliente para obtener el id con el que
+     * se registro para mostrarlo en el mensaje
+     *
+     * @param cliente
+     */
+    public void mostrarMensajeExito(Casting casting) {
+
+        JOptionPane.showMessageDialog(this, "Registrado con exito Cliente:" + casting.getId().toString());
+
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -329,79 +312,70 @@ public class PanelCasting extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarCastingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarCastingActionPerformed
- String tipo=null;
+        String tipo = null;
 
-    List<Perfil> p= new ArrayList();
-     List<Candidato> c= new ArrayList();
-     Agente agente= new Agente("RDGD","JHF","JAROL","HFHF");
-    
-        
-    if(tipoEnLinea.isSelected())
-    {
-        tipo=tipoEnLinea.getText();
-        Presencial castingOnline= new Presencial();
-        
-         try
-         {
-             castingOnline.setTipo(tipo);
-         castingOnline.setCandidatos(c);
-         castingOnline.setCliente(logica.consultarPorNombre(comboBoxClientes.getSelectedItem().toString()));
-         castingOnline.setCoste(Float.parseFloat(txtCoste.getText()));
-         castingOnline.setDescripcion(txtDescripcion.getText());
-         castingOnline.setFecha_contratacion(new Date());
-         castingOnline.setNombre(txtNombre.getText());
-         castingOnline.setPerfiles(p);
-         
-         castingOnline.validarDatos(castingOnline);
-         logica.guardarCasting(castingOnline);
-         }catch(Exception e)
-         {
-             mostrarError(new Exception("Datos vacios"));
-         } 
-        
-    }else if(tipoPresencial.isSelected())
-    {
-      Presencial  castingPresencial= new Presencial();
-      
-   
-      try {
-          obtenerFases();
-      } catch (ParseException ex) {
-          Logger.getLogger(PanelCasting.class.getName()).log(Level.SEVERE, null, ex);
-      }
-        
-        tipo=tipoPresencial.getText();
-      
-           try
-         {
-           
-        castingPresencial.setNumPersonas(Integer.parseInt(txtNumeroPersonas.getText().trim()));
-         castingPresencial.setTipo(tipo);
-         castingPresencial.setCandidatos(c);
-         castingPresencial.setCliente(logica.consultarPorNombre(comboBoxClientes.getSelectedItem().toString()));
-         castingPresencial.setCoste(Float.parseFloat(txtCoste.getText().trim()));
-         castingPresencial.setDescripcion(txtDescripcion.getText());
-         castingPresencial.setFase(fasesAgregadas);
-         castingPresencial.setFecha_contratacion(new Date());
-         castingPresencial.setNombre(txtNombre.getText());
-         castingPresencial.setNumPersonas( Integer.parseInt(  txtNumeroPersonas.getText().trim()));
-         castingPresencial.setPerfiles(p);
-         castingPresencial.setAgente(agente);
-         
+        List<Perfil> p = new ArrayList();
+        List<Candidato> c = new ArrayList();
+        Agente agente = new Agente("RDGD", "JHF", "JAROL", "HFHF");
 
-         castingPresencial.validarDatos(castingPresencial);
-         logica.guardarCasting(castingPresencial);
-         llenarTabla();
-         limpiarCampos();
-         mostrarMensajeExito(logica.consultarCastingNombre(castingPresencial.getNombre()));
-          
-         }catch(Exception e)
-         {
-             mostrarError(new Exception("Datos vacios"));
-         } 
-          
-    }
-    
+        if (tipoEnLinea.isSelected()) {
+            tipo = tipoEnLinea.getText();
+            Presencial castingOnline = new Presencial();
+
+            try {
+                castingOnline.setTipo(tipo);
+                castingOnline.setCandidatos(c);
+                castingOnline.setCliente(logica.consultarPorNombre(comboBoxClientes.getSelectedItem().toString()));
+                castingOnline.setCoste(Float.parseFloat(txtCoste.getText()));
+                castingOnline.setDescripcion(txtDescripcion.getText());
+                castingOnline.setFecha_contratacion(new Date());
+                castingOnline.setNombre(txtNombre.getText());
+                castingOnline.setPerfiles(p);
+
+                castingOnline.validarDatos(castingOnline);
+                logica.guardarCasting(castingOnline);
+            } catch (Exception e) {
+                mostrarError(new Exception("Datos vacios"));
+            }
+
+        } else if (tipoPresencial.isSelected()) {
+            Presencial castingPresencial = new Presencial();
+
+            try {
+                obtenerFases();
+            } catch (ParseException ex) {
+                Logger.getLogger(PanelCasting.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            tipo = tipoPresencial.getText();
+
+            try {
+
+                castingPresencial.setNumPersonas(Integer.parseInt(txtNumeroPersonas.getText().trim()));
+                castingPresencial.setTipo(tipo);
+                castingPresencial.setCandidatos(c);
+                castingPresencial.setCliente(logica.consultarPorNombre(comboBoxClientes.getSelectedItem().toString()));
+                castingPresencial.setCoste(Float.parseFloat(txtCoste.getText().trim()));
+                castingPresencial.setDescripcion(txtDescripcion.getText());
+                castingPresencial.setFase(fasesAgregadas);
+                castingPresencial.setFecha_contratacion(new Date());
+                castingPresencial.setNombre(txtNombre.getText());
+                castingPresencial.setNumPersonas(Integer.parseInt(txtNumeroPersonas.getText().trim()));
+                castingPresencial.setPerfiles(p);
+                castingPresencial.setAgente(agente);
+
+                castingPresencial.validarDatos(castingPresencial);
+                logica.guardarCasting(castingPresencial);
+                llenarTabla();
+                limpiarCampos();
+                mostrarMensajeExito(logica.consultarCastingNombre(castingPresencial.getNombre()));
+
+            } catch (Exception e) {
+                mostrarError(new Exception("Datos vacios"));
+            }
+
+        }
+
     }//GEN-LAST:event_btnRegistrarCastingActionPerformed
 
     private void comboBoxFasesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxFasesActionPerformed
@@ -413,52 +387,43 @@ public class PanelCasting extends javax.swing.JPanel {
     }//GEN-LAST:event_tipoPresencialActionPerformed
 
     private void btnAgregarFaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarFaseActionPerformed
-   
-        
-        try
-        {
-       //     fasesAgregadas= new ArrayList();
-      
-        String  fech = datePickerFecha.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-        SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-        Date  f = null;
-      try {
-          f = date.parse(fech);
-   
-     
-          // para verificar que la fecha no sea menor a la actual
-  
-          fase.verificaDatos(f);
-     
-          fase.setFechaInicio(f);
-          fase.setPruebaIndividual(new PruebaIndividual());
-          comboBoxFases.addItem(fech);
-        //  fasesAgregadas.add(fase);
-       
-         // mostrarListaFases();
-      } catch (ParseException ex) {
-          Logger.getLogger(PanelCasting.class.getName()).log(Level.SEVERE, null, ex);
-      }
-        }catch(RuntimeException ex)
-        {
+
+        try {
+            //     fasesAgregadas= new ArrayList();
+
+            String fech = datePickerFecha.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+            Date f = null;
+            try {
+                f = date.parse(fech);
+
+                // para verificar que la fecha no sea menor a la actual
+                fase.verificaDatos(f);
+
+                fase.setFechaInicio(f);
+                fase.setPruebaIndividual(new PruebaIndividual());
+                comboBoxFases.addItem(fech);
+                //  fasesAgregadas.add(fase);
+
+                // mostrarListaFases();
+            } catch (ParseException ex) {
+                Logger.getLogger(PanelCasting.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (RuntimeException ex) {
             mostrarError(ex);
         }
-  
-        
+
+
     }//GEN-LAST:event_btnAgregarFaseActionPerformed
 
-   
-    
-    
+
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-         
-     limpiarCampos();
+
+        limpiarCampos();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    
-    public void limpiarCampos()
-    {
-          txtNombre.setText("");
+    public void limpiarCampos() {
+        txtNombre.setText("");
         txtCoste.setText("");
         txtDescripcion.setText("");
         txtNumeroPersonas.setText("");
@@ -467,14 +432,13 @@ public class PanelCasting extends javax.swing.JPanel {
         comboBoxFases.removeAllItems();
     }
     private void btnEliminarFaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarFaseActionPerformed
-        if(muestraPregunta()==0)
-        {
-          
+        if (muestraPregunta() == 0) {
+
             comboBoxFases.removeItem(comboBoxFases.getSelectedItem());
-            
+
         }
-        
-        
+
+
     }//GEN-LAST:event_btnEliminarFaseActionPerformed
 
 
