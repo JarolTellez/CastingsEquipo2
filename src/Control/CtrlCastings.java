@@ -23,7 +23,7 @@ public class CtrlCastings {
       }
       
     
-    public void guardar(Casting casting)
+    public void guardar(Presencial casting)
     {
         fabricaDatos.guardarCasting(casting);
     }
@@ -34,8 +34,8 @@ public class CtrlCastings {
     }
     
     
-    //falta agregar
-    public List <Casting> consultarTodosCasting()
+
+    public List <Presencial> consultarTodosCasting()
     {
         return fabricaDatos.consultarTodosCastings();
     }

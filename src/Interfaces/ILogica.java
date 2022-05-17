@@ -16,14 +16,15 @@ public interface ILogica {
    
     
     public void registrarCliente(Cliente cliente);
-   
     public List<Agente> consultarTodosAgentes();
      public List<Cliente> consultarTodosClientes();
-     public List<Casting> consultarTodosCasting();
+     public List<Presencial> consultarTodosCasting();
      public Fase consultarFaseFecha();
      public void agregarFase();
      public void eliminarFase();
-     public void guardarCasting(Casting Casting);
+     public void guardarCasting(Presencial Casting);
      public void guardarPerfil(Perfil perfil);
       public Cliente consultarPorNombre(String nombre);
+        public Casting consultarCastingNombre(String nombre);
+        public void registrarAgente(Agente agente);
 }

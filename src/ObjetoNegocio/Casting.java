@@ -161,8 +161,15 @@ if(fecha.before(fechaactual)){
        throw new RuntimeException("Fecha pasada");
 }
     
-    
     }
+      
+      public void verificaDatos(String cliente,String agente,String tipo)
+      {
+          if(cliente==null||agente==null||tipo==null)
+          {
+                 throw new RuntimeException("No se ha seleccionado casting");
+          }
+      }
     @Override
     public String toString() {
         return "Casting{" + "id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", fecha_contratacion=" + fecha_contratacion + ", coste=" + coste + ", perfiles=" + perfiles + ", candidatos=" + candidatos + '}';

@@ -19,6 +19,7 @@ public class FachadaLogica implements ILogica {
     
     CtrClientes controlClientes= new CtrClientes();
     CtrlCastings controlCastings= new CtrlCastings();
+    CtrAgente controlAgente= new CtrAgente();
 
 
 
@@ -61,11 +62,11 @@ public class FachadaLogica implements ILogica {
 
     @Override
     public List<Agente> consultarTodosAgentes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return controlAgente.consultarTodos();
     }
 
     @Override
-    public List<Casting> consultarTodosCasting() {
+    public List<Presencial> consultarTodosCasting() {
         return controlCastings.consultarTodosCasting();
     }
 
@@ -85,7 +86,7 @@ public class FachadaLogica implements ILogica {
     }
 
     @Override
-    public void guardarCasting(Casting casting) {
+    public void guardarCasting(Presencial casting) {
         try
         {
             if(controlCastings.buscarCastingNombre(casting.getNombre())==null)
@@ -107,6 +108,41 @@ public class FachadaLogica implements ILogica {
     public void guardarPerfil(Perfil pefil) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Casting consultarCastingNombre(String nombre) {
+      try{
+                return controlCastings.buscarCastingNombre(nombre);
+            
+    
+        }catch(RuntimeException ex)
+                {
+                    throw new RuntimeException(ex.getMessage());
+                }
+    }
+
+    @Override
+    public void registrarAgente(Agente agente) {
+          try
+        {
+            if(controlAgente.buscarAgenteNombre(agente.getNombre())==null)
+            {
+                controlAgente.Registrar(agente);
+            }
+            
+        else
+        {
+            throw new RuntimeException("Agente Existente");
+           // return new Exception("Agente Existente");
+        }
+       
+        
+        }catch(RuntimeException ex)
+        {
+               throw new RuntimeException(ex.getMessage());
+        }  
+    }
+
     
     
    

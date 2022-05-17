@@ -8,6 +8,7 @@ package presentacion;
 import Interfaces.ILogica;
 import static Interfaces.Implementacion.FabricaLogica.dameInstancia;
 import ObjetoNegocio.*;
+import com.sun.xml.internal.ws.util.StringUtils;
 import java.awt.BorderLayout;
 import java.awt.MenuComponent;
 import java.text.DecimalFormat;
@@ -31,7 +32,7 @@ import static presentacion.FrmPrincipal.panelPrincipal;
 public class PanelCasting extends javax.swing.JPanel { 
   SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
  DecimalFormat formatoD = new DecimalFormat("#.00");
- List<Fase>fasesAgregadas;
+ List<Fase>fasesAgregadas= new ArrayList();;
  
  Fase fase= new Fase();
 
@@ -80,7 +81,7 @@ public class PanelCasting extends javax.swing.JPanel {
     
       public void llenarTabla()
     {
-          List<Casting> list=logica.consultarTodosCasting();
+          List<Presencial> list=logica.consultarTodosCasting();
         DefaultTableModel model= (DefaultTableModel) tblCastings.getModel();
  
         int rowCount = model.getRowCount();
@@ -110,12 +111,12 @@ public class PanelCasting extends javax.swing.JPanel {
        */
       public void obtenerFases() throws ParseException
       {    
-                fasesAgregadas= new ArrayList();
+         
+                
                 SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd"); 
-          if(comboBoxFases!=null)
+          if(comboBoxFases.getSelectedItem().toString().isEmpty())
           {
     
-      
           for(int i=0;i<comboBoxFases.countComponents();i++)
           { 
             
@@ -126,7 +127,7 @@ public class PanelCasting extends javax.swing.JPanel {
 
     
     
-         public void mostrarError(RuntimeException ex)
+         public void mostrarError(Exception ex)
     {
        
         JOptionPane.showMessageDialog(this, ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
@@ -141,7 +142,7 @@ public class PanelCasting extends javax.swing.JPanel {
      public void mostrarMensajeExito(Casting casting)
     {
   
-        JOptionPane.showMessageDialog(this, "Registrado con exito Cliente:" );
+        JOptionPane.showMessageDialog(this, "Registrado con exito Cliente:"+casting.getId().toString() );
        
         
     }
@@ -335,11 +336,10 @@ public class PanelCasting extends javax.swing.JPanel {
      Agente agente= new Agente("RDGD","JHF","JAROL","HFHF");
     
         
-
     if(tipoEnLinea.isSelected())
     {
         tipo=tipoEnLinea.getText();
-        Online castingOnline= new Online();
+        Presencial castingOnline= new Presencial();
         
          try
          {
@@ -354,9 +354,9 @@ public class PanelCasting extends javax.swing.JPanel {
          
          castingOnline.validarDatos(castingOnline);
          logica.guardarCasting(castingOnline);
-         }catch(RuntimeException e)
+         }catch(Exception e)
          {
-             mostrarError(e);
+             mostrarError(new Exception("Datos vacios"));
          } 
         
     }else if(tipoPresencial.isSelected())
@@ -371,29 +371,33 @@ public class PanelCasting extends javax.swing.JPanel {
       }
         
         tipo=tipoPresencial.getText();
-        castingPresencial.setNumPersonas( Integer.parseInt( txtNumeroPersonas.getText()));
+      
            try
          {
+           
+        castingPresencial.setNumPersonas(Integer.parseInt(txtNumeroPersonas.getText().trim()));
          castingPresencial.setTipo(tipo);
          castingPresencial.setCandidatos(c);
          castingPresencial.setCliente(logica.consultarPorNombre(comboBoxClientes.getSelectedItem().toString()));
-         castingPresencial.setCoste(Float.parseFloat(txtCoste.getText()));
+         castingPresencial.setCoste(Float.parseFloat(txtCoste.getText().trim()));
          castingPresencial.setDescripcion(txtDescripcion.getText());
          castingPresencial.setFase(fasesAgregadas);
          castingPresencial.setFecha_contratacion(new Date());
          castingPresencial.setNombre(txtNombre.getText());
+         castingPresencial.setNumPersonas( Integer.parseInt(  txtNumeroPersonas.getText().trim()));
          castingPresencial.setPerfiles(p);
          castingPresencial.setAgente(agente);
-         castingPresencial.setNumPersonas(Integer.parseInt(txtNumeroPersonas.getText()));
-
          
+
          castingPresencial.validarDatos(castingPresencial);
          logica.guardarCasting(castingPresencial);
          llenarTabla();
          limpiarCampos();
-         }catch(RuntimeException e)
+         mostrarMensajeExito(logica.consultarCastingNombre(castingPresencial.getNombre()));
+          
+         }catch(Exception e)
          {
-             mostrarError(e);
+             mostrarError(new Exception("Datos vacios"));
          } 
           
     }
@@ -443,6 +447,9 @@ public class PanelCasting extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnAgregarFaseActionPerformed
 
+   
+    
+    
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
          
      limpiarCampos();

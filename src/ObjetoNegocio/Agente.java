@@ -5,21 +5,18 @@
  */
 package ObjetoNegocio;
 
+import org.bson.types.ObjectId;
+
 /**
  *
  * @author Jarol
  */
 public class Agente {
-    int numeroEmpleado;
+    ObjectId id;
+    //int numeroEmpleado;
     String RFC,CURP,nombre,direccion;
 
-     public Agente(int numeroEmpleado, String RFC, String CURP, String nombre, String direccion) {
-        this.numeroEmpleado = numeroEmpleado;
-        this.RFC = RFC;
-        this.CURP = CURP;
-        this.nombre = nombre;
-        this.direccion = direccion;
-    }
+     
 
     public Agente(String RFC, String CURP, String nombre, String direccion) {
         this.RFC = RFC;
@@ -27,17 +24,29 @@ public class Agente {
         this.nombre = nombre;
         this.direccion = direccion;
     }
+
+    public Agente( String RFC, String CURP, String nombre, String direccion,ObjectId id) {
+        this.id = id;
+        this.RFC = RFC;
+        this.CURP = CURP;
+        this.nombre = nombre;
+        this.direccion = direccion;
+    }
+    
+    
      
      public Agente()
      {}
-    
-    public int getNumeroEmpleado() {
-        return numeroEmpleado;
+
+    public ObjectId getId() {
+        return id;
     }
 
-    public void setNumeroEmpleado(int numeroEmpleado) {
-        this.numeroEmpleado = numeroEmpleado;
+    public void setId(ObjectId id) {
+        this.id = id;
     }
+    
+ 
 
     public String getRFC() {
         return RFC;
@@ -71,13 +80,22 @@ public class Agente {
         this.direccion = direccion;
     }
 
-
-    
     @Override
     public String toString() {
-        return "Agente{" + "numeroEmpleado=" + numeroEmpleado + ", RFC=" + RFC + ", CURP=" + CURP + ", nombre=" + nombre + ", direccion=" + direccion + '}';
+        return "id=" + id + ", RFC=" + RFC + ", CURP=" + CURP + ", nombre=" + nombre + ", direccion=" + direccion ;
     }
 
+
+    
+      public void validarDatos(Agente agente)
+    {
+      
+        if(agente.getNombre().trim().length()==0||agente.getDireccion().trim().length()==0||agente.getCURP().trim().length()==0||
+                agente.getRFC().trim().length()==0)
+        {
+           throw new RuntimeException("Datos incompletos");
+        }
+    }
    
     
     

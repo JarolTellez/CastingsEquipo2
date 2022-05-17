@@ -11,6 +11,7 @@ import ObjetoNegocio.Casting;
 import ObjetoNegocio.Cliente;
 import ObjetoNegocio.Fase;
 import ObjetoNegocio.Perfil;
+import ObjetoNegocio.Presencial;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +24,7 @@ public class FachadaDatos implements IDatos {
     ClienteDAO clienteDao = new ClienteDAO();
     CastingDAO castingDAO = new CastingDAO();
     PerfilDAO perfilDAO= new PerfilDAO();
+      AgenteDAO agenteDAO = new AgenteDAO();
     
     
     public void FachadaDatos()
@@ -60,11 +62,11 @@ public class FachadaDatos implements IDatos {
 
     @Override
     public List<Agente> consultarTodosAgentes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+     return agenteDAO.consultarTodos();
     }
 
     @Override
-    public List<Casting> consultarTodosCastings() {
+    public List<Presencial> consultarTodosCastings() {
      return  castingDAO.consultarTodos();
     }
 
@@ -84,8 +86,8 @@ public class FachadaDatos implements IDatos {
     }
 
     @Override
-    public void guardarCasting(Casting casting) {
-       
+    public void guardarCasting(Presencial casting) {
+      
         castingDAO.guardar(casting);
        
        
@@ -99,6 +101,16 @@ public class FachadaDatos implements IDatos {
     @Override
     public Cliente buscarCliente(Cliente cliente) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Agente buscarAgenteNombre(String nombre) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void guardarAgente(Agente agente) {
+      agenteDAO.guardar(agente);
     }
     
  

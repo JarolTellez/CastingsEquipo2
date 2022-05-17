@@ -19,15 +19,21 @@ public interface IDatos {
     
      public List<Cliente> consultarTodosClientes();
      public List<Agente> consultarTodosAgentes();
-     public List<Casting> consultarTodosCastings();
+     public List<Presencial> consultarTodosCastings();
      public Fase buscarFaseFecha(Date fecha);
      public Casting buscarCastingNombre(String nombre);
      public Perfil buscarPerfilCasting();
-     public void guardarCasting(Casting casting);
+     public void guardarCasting(Presencial casting);
      public void guardarPerfil(Perfil perfil);
      
     
     public Cliente buscarCliente(Cliente cliente);
+    
+      public Agente buscarAgenteNombre(String nombre);
+
+   
+
+    public void guardarAgente(Agente agente);
     
     
 }

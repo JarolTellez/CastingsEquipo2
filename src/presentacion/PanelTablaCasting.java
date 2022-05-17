@@ -5,8 +5,17 @@
  */
 package presentacion;
 
+import Interfaces.ILogica;
+import static Interfaces.Implementacion.FabricaLogica.dameInstancia;
+import ObjetoNegocio.Agente;
+import ObjetoNegocio.Casting;
+import ObjetoNegocio.Cliente;
+import ObjetoNegocio.Presencial;
 import java.awt.BorderLayout;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 import static presentacion.FrmPrincipal.panelPrincipal;
 
 /**
@@ -17,11 +26,16 @@ public class PanelTablaCasting extends javax.swing.JPanel {
 
     
     PanelPerfil perfil= new PanelPerfil();
+        ILogica logica;
+        Presencial casting = new Presencial();
+        String nombreCliente=null,nombreAgente=null,tipoCasting=null;
     /**
      * Creates new form TablaCastings
      */
     public PanelTablaCasting() {
         initComponents();
+        logica=dameInstancia();
+         llenarTabla();
     }
     
 public JPanel desplegarPanel()
@@ -51,19 +65,25 @@ return this;
 
         fondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jScrollPane1MouseClicked(evt);
+            }
+        });
+
         tblCastings.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Nombre", "Descripción", "Fecha contratación", "Coste", "Tipo casting", " Numero personas", "Cliente"
+                "ID", "Nombre", "Descripción", "Fecha contratación", "Coste", "Tipo casting", " Numero personas", "Cliente", "Agente"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -74,9 +94,14 @@ return this;
                 return canEdit [columnIndex];
             }
         });
+        tblCastings.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblCastingsMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblCastings);
 
-        fondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 830, 320));
+        fondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 70, 830, 320));
 
         btnRegistrarPerfil.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         btnRegistrarPerfil.setText("Registrar Perfil");
@@ -105,10 +130,66 @@ return this;
 
     private void btnRegistrarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarPerfilActionPerformed
         //  aqui falta la condicion para ver si se selecciono un casting
-
+        try
+        {
+       casting.verificaDatos(nombreCliente,nombreAgente,tipoCasting);
+ perfil.recuperarDatos(nombreCliente,nombreAgente,tipoCasting);
+ 
         perfil.desplegarPanel();
+        }catch(RuntimeException ex)
+        {
+            mostrarError(ex);
+        }
     }//GEN-LAST:event_btnRegistrarPerfilActionPerformed
 
+    private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jScrollPane1MouseClicked
+
+    private void tblCastingsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblCastingsMouseClicked
+  
+   DefaultTableModel model= (DefaultTableModel) tblCastings.getModel();
+         nombreCliente=model.getValueAt(tblCastings.getSelectedRow(),7 ).toString();
+          nombreAgente=model.getValueAt(tblCastings.getSelectedRow(), 8).toString();
+         tipoCasting=model.getValueAt(tblCastings.getSelectedRow(), 6).toString();        
+        
+    }//GEN-LAST:event_tblCastingsMouseClicked
+
+    
+    
+    public void mostrarError(Exception ex)
+    {
+         JOptionPane.showMessageDialog(this, ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+    }
+    
+      public void llenarTabla()
+    {
+          List<Presencial> list=logica.consultarTodosCasting();
+        DefaultTableModel model= (DefaultTableModel) tblCastings.getModel();
+ 
+        int rowCount = model.getRowCount();
+        
+        for(int m=rowCount-1;m>=0;m--)
+        {
+           model.removeRow(m);
+        }
+        
+        Object rowData[]=new Object[9];
+        for(int i=0; i<list.size();i++){
+            rowData[0]=list.get(i).getId();
+            rowData[1]=list.get(i).getNombre();
+            rowData[2]=list.get(i).getDescripcion();
+            rowData[3]=list.get(i).getFecha_contratacion();
+             rowData[4]=list.get(i).getCoste();
+              rowData[5]=list.get(i).getTipo();
+               rowData[6]=list.get(i).getNumPersonas();
+               // aqui solo puse los nombres pero podemos dejar el objeto completo
+                 rowData[7]=list.get(i).getCliente().getNombre();
+                    rowData[8]=list.get(i).getAgente().getNombre();
+            model.addRow(rowData);
+        }
+        
+        }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegistrarPerfil;

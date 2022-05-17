@@ -17,6 +17,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     BuscarCasting panelBuscarCastings= new BuscarCasting();
     PanelPerfil panelPerfil= new PanelPerfil();
     PanelTablaCasting panelTabla = new PanelTablaCasting();
+    PanelAgenteCasting panelAgentes= new PanelAgenteCasting();
 
     public FrmPrincipal() {
           initComponents();
@@ -55,6 +56,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
         panelPrincipal.repaint();
         this.setTitle("Buscar Casting");
     }
+    
+    public void despliegaPanelAgente()
+    {
+          panelPrincipal.removeAll();
+        panelPrincipal.add(panelAgentes.despliegaPanel(),BorderLayout.CENTER);
+        panelPrincipal.revalidate();
+        panelPrincipal.repaint();
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -70,6 +79,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
         menuRegistrarCasting = new javax.swing.JMenuItem();
         menuRegistrarPerfil = new javax.swing.JMenuItem();
         menuBuscarCasting = new javax.swing.JMenuItem();
+        menuRegistrarAgente = new javax.swing.JMenuItem();
         MenuItemSalir = new javax.swing.JMenuItem();
 
         jMenuItem4.setText("jMenuItem4");
@@ -126,6 +136,14 @@ public class FrmPrincipal extends javax.swing.JFrame {
             }
         });
         MenuCastings.add(menuBuscarCasting);
+
+        menuRegistrarAgente.setText("Registrar Agente");
+        menuRegistrarAgente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuRegistrarAgenteActionPerformed(evt);
+            }
+        });
+        MenuCastings.add(menuRegistrarAgente);
 
         jMenu1.add(MenuCastings);
 
@@ -186,6 +204,10 @@ public class FrmPrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_MenuItemSalirActionPerformed
 
+    private void menuRegistrarAgenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuRegistrarAgenteActionPerformed
+        despliegaPanelAgente();
+    }//GEN-LAST:event_menuRegistrarAgenteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -230,6 +252,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem menuBuscarCasting;
+    private javax.swing.JMenuItem menuRegistrarAgente;
     private javax.swing.JMenuItem menuRegistrarCasting;
     private javax.swing.JMenuItem menuRegistrarCliente;
     private javax.swing.JMenuItem menuRegistrarPerfil;

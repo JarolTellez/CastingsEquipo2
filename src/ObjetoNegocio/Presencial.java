@@ -39,13 +39,6 @@ public class Presencial extends Casting {
         this.agente = agente;
     }
 
-   
-
-    
-   
-    
-    
-
     public int getNumPersonas() {
         return numPersonas;
     }

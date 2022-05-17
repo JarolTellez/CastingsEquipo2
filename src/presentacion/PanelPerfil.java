@@ -27,7 +27,7 @@ public class PanelPerfil extends javax.swing.JPanel {
     
     public void desplegarPanel()
     {
-        recuperarDatos();
+       
         this.setSize(1090, 590);// tamano del panel
         this.setLocation(5,5);// posicion dentro del panel principal
      
@@ -39,10 +39,12 @@ public class PanelPerfil extends javax.swing.JPanel {
     }
     
  
-    public void recuperarDatos()
+    public void recuperarDatos(String nombreCliente,String nombreAgente, String tipoCasting)
     {
            
-       
+       txtNombreCliente.setText(nombreCliente);
+       txtNombreAgente.setText(nombreAgente);
+       txtTipoCasting.setText(tipoCasting);
     }
     
     public void limpiarCampos(){
