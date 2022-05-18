@@ -21,24 +21,20 @@ import javax.swing.table.DefaultTableModel;
 import org.bson.types.ObjectId;
 import static presentacion.FrmPrincipal.panelPrincipal;
 
-
 /**
  *
  * @author Jarol
  */
 public class PanelCliente extends javax.swing.JPanel {
 
+    ILogica logica;
 
-      
-     
-      ILogica logica;
-   
     /**
      * Creates new form RegistrarClientes
      */
     public PanelCliente() {
         initComponents();
-        logica=dameInstancia();
+        logica = dameInstancia();
         llenarTabla();
     }
 
@@ -159,111 +155,94 @@ public class PanelCliente extends javax.swing.JPanel {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
 //NO HACER USEN FACTORY METHOD
-String actividad=null;
-     if(actividadCine.isSelected())
-     {
-         actividad=actividadCine.getText();
-         
-     }else if(actividadModa.isSelected())
-     {
-         actividad=actividadModa.getText();
-     }
+        String actividad = null;
+        if (actividadCine.isSelected()) {
+            actividad = actividadCine.getText();
 
-    
-          
+        } else if (actividadModa.isSelected()) {
+            actividad = actividadModa.getText();
+        }
+
         Cliente c = new Cliente(new ObjectId(),
                 txtNombre.getText(),
                 txtDireccion.getText(),
                 txtTelefono.getText().trim(),
                 txtContacto.getText(),
-               actividad,
+                actividad,
                 new ArrayList<Casting>());
-        
-         try
-         {
-       c.validarDatos(c);
 
-      logica.registrarCliente(c);
-      limpiarCampos();
-         llenarTabla();
-        
-        mostrarMensajeExito(c);
-     
-       
-         }catch( RuntimeException ex)
-         {
-             mostrarError(ex);
-         }
+        try {
+            c.validarDatos(c);
 
-      
-       
+            logica.registrarCliente(c);
+            limpiarCampos();
+            llenarTabla();
+
+            mostrarMensajeExito(c);
+
+        } catch (RuntimeException ex) {
+            mostrarError(ex);
+        }
+
+
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         limpiarCampos();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    public JPanel despliegaPanel()
-    {
-            
-          
-        this.setSize(1040,500);
-        this.setLocation(5,5);
-        
-       
-      
-    return this;
+    public JPanel despliegaPanel() {
+
+        this.setSize(1040, 500);
+        this.setLocation(5, 5);
+
+        return this;
     }
-    
-    public void limpiarCampos()
-    {
+
+    public void limpiarCampos() {
         txtNombre.setText("");
         txtTelefono.setText("");
         txtDireccion.setText("");
         txtContacto.setText("");
         grupoActividad.clearSelection();
     }
-    
-    public void mostrarError(Exception ex)
-    {
-       
-        JOptionPane.showMessageDialog(this, ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
-       
-        
+
+    public void mostrarError(Exception ex) {
+
+        JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+
     }
-    
+
     /**
-     * Muestra mensaje de exito y busca el cliente para obtener el id con el que se registro para mostrarlo en el mensaje
-     * @param cliente 
+     * Muestra mensaje de exito y busca el cliente para obtener el id con el que
+     * se registro para mostrarlo en el mensaje
+     *
+     * @param cliente
      */
-     public void mostrarMensajeExito(Cliente cliente)
-    {
-  
-        JOptionPane.showMessageDialog(this, "Registrado con exito Cliente:"+(  (Cliente) logica.consultarPorNombre(cliente.getNombre())).getId() );
-       
-        
+    public void mostrarMensajeExito(Cliente cliente) {
+
+        JOptionPane.showMessageDialog(this, "Registrado con exito Cliente:" + ((Cliente) logica.consultarPorNombre(cliente.getNombre())).getId());
+
     }
-    
-    public void llenarTabla()
-    {
-          List<Cliente> list=logica.consultarTodosClientes();
-        DefaultTableModel model= (DefaultTableModel) tblClientes.getModel();
- 
+
+    public void llenarTabla() {
+        List<Cliente> list = logica.consultarTodosClientes();
+        DefaultTableModel model = (DefaultTableModel) tblClientes.getModel();
+
         int rowCount = model.getRowCount();
-        
-        for(int m=rowCount-1;m>=0;m--)
-        {
-           model.removeRow(m);
+
+        for (int m = rowCount - 1; m >= 0; m--) {
+            model.removeRow(m);
         }
-        
-        Object rowData[]=new Object[6];
-        for(int i=0; i<list.size();i++){
-            rowData[0]=list.get(i).getId();
-            rowData[1]=list.get(i).getNombre();
-            rowData[2]=list.get(i).getDireccion();
-            rowData[3]=list.get(i).getTelefono();
-             rowData[4]=list.get(i).getPersonaContacto();
-              rowData[5]=list.get(i).getTipoActividad();
+
+        Object rowData[] = new Object[6];
+        for (int i = 0; i < list.size(); i++) {
+            rowData[0] = list.get(i).getId();
+            rowData[1] = list.get(i).getNombre();
+            rowData[2] = list.get(i).getDireccion();
+            rowData[3] = list.get(i).getTelefono();
+            rowData[4] = list.get(i).getPersonaContacto();
+            rowData[5] = list.get(i).getTipoActividad();
             model.addRow(rowData);
         }
 

@@ -20,37 +20,32 @@ public class PanelPerfil extends javax.swing.JPanel {
      */
     public PanelPerfil() {
         initComponents();
- 
-     
+
     }
-    
-    
-    public void desplegarPanel()
-    {
-       
+
+    public void desplegarPanel() {
+
         this.setSize(1090, 590);// tamano del panel
-        this.setLocation(5,5);// posicion dentro del panel principal
-     
+        this.setLocation(5, 5);// posicion dentro del panel principal
+
         panelPrincipal.removeAll();
-        panelPrincipal.add(this,BorderLayout.CENTER);
+        panelPrincipal.add(this, BorderLayout.CENTER);
         panelPrincipal.revalidate();
         panelPrincipal.repaint();
-  
+
     }
-    
- 
-    public void recuperarDatos(String nombreCliente,String nombreAgente, String tipoCasting)
-    {
-           
-       txtNombreCliente.setText(nombreCliente);
-       txtNombreAgente.setText(nombreAgente);
-       txtTipoCasting.setText(tipoCasting);
+
+    public void recuperarDatos(String nombreCliente, String nombreAgente, String tipoCasting) {
+
+        txtNombreCliente.setText(nombreCliente);
+        txtNombreAgente.setText(nombreAgente);
+        txtTipoCasting.setText(tipoCasting);
     }
-    
-    public void limpiarCampos(){
+
+    public void limpiarCampos() {
+
         txtNombreCliente.setText("");
         txtNombreAgente.setText("");
-        txtId.setText("");
         txtSexo.setText("");
         txtColorPelo.setText("");
         txtColorOjos.setText("");
@@ -61,7 +56,7 @@ public class PanelPerfil extends javax.swing.JPanel {
         comboBoxEdad.setSelectedIndex(0);
         comboBoxAltura.setSelectedIndex(0);
     }
-   
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -73,13 +68,11 @@ public class PanelPerfil extends javax.swing.JPanel {
 
         grupoEspecialidad = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtId = new javax.swing.JTextField();
         txtColorOjos = new javax.swing.JTextField();
         txtSexo = new javax.swing.JTextField();
         txtColorPelo = new javax.swing.JTextField();
@@ -107,48 +100,44 @@ public class PanelPerfil extends javax.swing.JPanel {
         txtTipoCasting = new javax.swing.JTextField();
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setText("ID:");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 50, -1, -1));
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
 
         jLabel3.setText("Sexo:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, -1, -1));
 
         jLabel4.setText("Color pelo:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, -1));
 
         jLabel5.setText("Color ojos:");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, -1, -1));
 
         jLabel6.setText("Experiencia:");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
-        jPanel1.add(txtId, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 50, 190, -1));
-        jPanel1.add(txtColorOjos, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 190, -1));
-        jPanel1.add(txtSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 190, -1));
-        jPanel1.add(txtColorPelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 190, -1));
-        jPanel1.add(txtExperiencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, 190, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, -1, -1));
+        jPanel1.add(txtColorOjos, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 140, 190, -1));
+        jPanel1.add(txtSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 190, -1));
+        jPanel1.add(txtColorPelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 190, -1));
+        jPanel1.add(txtExperiencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 190, -1));
 
         jLabel7.setText("Estado:");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, -1, -1));
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, -1, -1));
 
         comboBoxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(comboBoxEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, -1, -1));
+        jPanel1.add(comboBoxEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, -1, -1));
 
         jLabel8.setText("Especialidad:");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 310, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
 
         jLabel9.setText("Rango edad:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 360, -1, -1));
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, -1, -1));
 
         jLabel10.setText("Rango altura:");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 410, -1, -1));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, -1, -1));
 
         comboBoxEdad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(comboBoxEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 360, -1, -1));
+        jPanel1.add(comboBoxEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 320, -1, -1));
 
         comboBoxAltura.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(comboBoxAltura, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 410, -1, -1));
+        jPanel1.add(comboBoxAltura, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, -1, -1));
 
         tblPerfiles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -175,10 +164,10 @@ public class PanelPerfil extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblPerfiles);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 60, 710, 190));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 60, 710, 210));
 
         btnRegistrarPerfil.setText("Registrar");
-        jPanel1.add(btnRegistrarPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 470, -1, -1));
+        jPanel1.add(btnRegistrarPerfil, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 420, -1, -1));
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -186,15 +175,15 @@ public class PanelPerfil extends javax.swing.JPanel {
                 btnCancelarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 470, -1, -1));
+        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 420, -1, -1));
 
         grupoEspecialidad.add(especialidadModelo);
         especialidadModelo.setText("Modelo");
-        jPanel1.add(especialidadModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 310, -1, -1));
+        jPanel1.add(especialidadModelo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 270, -1, -1));
 
         grupoEspecialidad.add(especialidadActor);
         especialidadActor.setText("Actor");
-        jPanel1.add(especialidadActor, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 310, -1, -1));
+        jPanel1.add(especialidadActor, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 270, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel12.setText("Perfiles");
@@ -202,7 +191,7 @@ public class PanelPerfil extends javax.swing.JPanel {
 
         jLabel11.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         jLabel11.setText("Datos Casting seleccionado");
-        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 270, -1, -1));
+        jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 280, -1, -1));
 
         jLabel13.setText("Nombre cliente:");
         jPanel1.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 340, -1, -1));
@@ -212,8 +201,14 @@ public class PanelPerfil extends javax.swing.JPanel {
 
         jLabel15.setText("TipoCasting");
         jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 420, 70, 20));
+
+        txtNombreCliente.setEditable(false);
         jPanel1.add(txtNombreCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 340, 210, -1));
+
+        txtNombreAgente.setEditable(false);
         jPanel1.add(txtNombreAgente, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 380, 210, -1));
+
+        txtTipoCasting.setEditable(false);
         jPanel1.add(txtTipoCasting, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 420, 150, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -248,7 +243,6 @@ public class PanelPerfil extends javax.swing.JPanel {
     private javax.swing.JRadioButton especialidadActor;
     private javax.swing.JRadioButton especialidadModelo;
     private javax.swing.ButtonGroup grupoEspecialidad;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -269,7 +263,6 @@ public class PanelPerfil extends javax.swing.JPanel {
     private javax.swing.JTextField txtColorOjos;
     private javax.swing.JTextField txtColorPelo;
     private javax.swing.JTextField txtExperiencia;
-    private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombreAgente;
     private javax.swing.JTextField txtNombreCliente;
     private javax.swing.JTextField txtSexo;
