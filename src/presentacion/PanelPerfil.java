@@ -5,8 +5,13 @@
  */
 package presentacion;
 
+import Interfaces.ILogica;
+import static Interfaces.Implementacion.FabricaLogica.dameInstancia;
+import ObjetoNegocio.*;
 import java.awt.BorderLayout;
-import javax.swing.JPanel;
+import java.util.List;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.table.DefaultTableModel;
 import static presentacion.FrmPrincipal.panelPrincipal;
 
 /**
@@ -14,13 +19,32 @@ import static presentacion.FrmPrincipal.panelPrincipal;
  * @author Jarol
  */
 public class PanelPerfil extends javax.swing.JPanel {
+    
+    ILogica logica;
+    
 
     /**
      * Creates new form RegistrarPerfil
      */
     public PanelPerfil() {
         initComponents();
+        logica = dameInstancia();
+        llenarComboBoxes();
 
+    }
+    
+    public void llenarComboBoxes(){
+        //ALTURA
+        comboBoxEstado.removeAllItems();
+        comboBoxAltura.setModel(new DefaultComboBoxModel(RangoAltura.values()));
+        
+        //EDAD
+        comboBoxEstado.removeAllItems();
+        comboBoxEdad.setModel(new DefaultComboBoxModel(RangoEdad.values()));
+        
+        //Estados
+        comboBoxEstado.removeAllItems();
+        comboBoxEstado.setModel(new DefaultComboBoxModel(Estado.values()));
     }
 
     public void desplegarPanel() {
@@ -55,6 +79,29 @@ public class PanelPerfil extends javax.swing.JPanel {
         comboBoxEstado.setSelectedIndex(0);
         comboBoxEdad.setSelectedIndex(0);
         comboBoxAltura.setSelectedIndex(0);
+    }
+    
+    public void llenarTabla() {
+        List<Perfil> list = logica.consultarTodosPerfiles();
+        DefaultTableModel model = (DefaultTableModel) tblPerfiles.getModel();
+
+        int rowCount = model.getRowCount();
+
+        for (int m = rowCount - 1; m >= 0; m--) {
+            model.removeRow(m);
+        }
+
+        Object rowData[] = new Object[6];
+        for (int i = 0; i < list.size(); i++) {
+            rowData[0] = list.get(i).getId();
+            rowData[1] = list.get(i).getSexo();
+            rowData[2] = list.get(i).getColorPelo();
+            rowData[3] = list.get(i).getColorOjos();
+            rowData[4] = list.get(i).getEspecialidad();
+            rowData[5] = list.get(i).getEstado();
+            model.addRow(rowData);
+        }
+
     }
 
     /**
@@ -120,9 +167,7 @@ public class PanelPerfil extends javax.swing.JPanel {
 
         jLabel7.setText("Estado:");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 230, -1, -1));
-
-        comboBoxEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(comboBoxEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, -1, -1));
+        jPanel1.add(comboBoxEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 230, 80, -1));
 
         jLabel8.setText("Especialidad:");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
@@ -133,11 +178,13 @@ public class PanelPerfil extends javax.swing.JPanel {
         jLabel10.setText("Rango altura:");
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 370, -1, -1));
 
-        comboBoxEdad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(comboBoxEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 320, -1, -1));
-
-        comboBoxAltura.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(comboBoxAltura, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, -1, -1));
+        comboBoxEdad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxEdadActionPerformed(evt);
+            }
+        });
+        jPanel1.add(comboBoxEdad, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 320, 80, -1));
+        jPanel1.add(comboBoxAltura, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 370, 80, -1));
 
         tblPerfiles.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -233,13 +280,17 @@ public class PanelPerfil extends javax.swing.JPanel {
         limpiarCampos();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void comboBoxEdadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxEdadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxEdadActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnRegistrarPerfil;
     private javax.swing.JComboBox<String> comboBoxAltura;
     private javax.swing.JComboBox<String> comboBoxEdad;
-    private javax.swing.JComboBox<String> comboBoxEstado;
+    private javax.swing.JComboBox<Estado> comboBoxEstado;
     private javax.swing.JRadioButton especialidadActor;
     private javax.swing.JRadioButton especialidadModelo;
     private javax.swing.ButtonGroup grupoEspecialidad;
