@@ -21,7 +21,7 @@ public class FachadaLogica implements ILogica {
     CtrClientes controlClientes= new CtrClientes();
     CtrlCastings controlCastings= new CtrlCastings();
     CtrAgente controlAgente= new CtrAgente();
-
+    CtrPerfil controlPerfil=new CtrPerfil();
 
 
    

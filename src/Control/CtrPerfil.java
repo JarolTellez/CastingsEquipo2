@@ -6,7 +6,9 @@
 package Control;
 
 import Interfaces.IDatos;
+import Interfaces.Implementacion.FachadaDatos;
 import ObjetoNegocio.Perfil;
+import java.util.List;
 
 /**
  *
@@ -15,14 +17,16 @@ import ObjetoNegocio.Perfil;
 public class CtrPerfil {
     IDatos fabricaDatos ;
 
-    public CtrPerfil(IDatos fabricaDatos) {
-        this.fabricaDatos = fabricaDatos;
+    public CtrPerfil() {
+        this.fabricaDatos = new FachadaDatos();
     }
     
     public void registrarPerfil(Perfil perfil){
         fabricaDatos.guardarPerfil(perfil);
     }
     
-    
+    public List<Perfil> consultarTodos(){
+        return fabricaDatos.consultarTodosPerfiles();
+    }
     
 }

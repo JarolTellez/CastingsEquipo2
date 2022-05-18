@@ -23,51 +23,44 @@ public class FachadaDatos implements IDatos {
 
     ClienteDAO clienteDao = new ClienteDAO();
     CastingDAO castingDAO = new CastingDAO();
-    PerfilDAO perfilDAO= new PerfilDAO();
-      AgenteDAO agenteDAO = new AgenteDAO();
-    
-    
-    public void FachadaDatos()
-    {}
+    PerfilDAO perfilDAO = new PerfilDAO();
+    AgenteDAO agenteDAO = new AgenteDAO();
 
- 
+    public void FachadaDatos() {
+    }
 
     @Override
     public Cliente buscarClienteNombre(String nombre) {
-      Cliente clientes = clienteDao.buscarPorNombre(nombre);
-    
+        Cliente clientes = clienteDao.buscarPorNombre(nombre);
+
         return clientes;
     }
 
     @Override
     public void guardarCliente(Cliente cliente) {
-        
-            clienteDao.guardar(cliente);
-          
-    
-            
-        
+
+        clienteDao.guardar(cliente);
     }
 
     @Override
     public List<Cliente> consultarTodosClientes() {
-            try {
+        try {
             return clienteDao.consultarTodos();
-          
+
         } catch (RuntimeException e) {
-            
+
             throw new RuntimeException("Error al consultar los clientes");
         }
     }
 
     @Override
     public List<Agente> consultarTodosAgentes() {
-     return agenteDAO.consultarTodos();
+        return agenteDAO.consultarTodos();
     }
 
     @Override
     public List<Presencial> consultarTodosCastings() {
-     return  castingDAO.consultarTodos();
+        return castingDAO.consultarTodos();
     }
 
     @Override
@@ -87,10 +80,9 @@ public class FachadaDatos implements IDatos {
 
     @Override
     public void guardarCasting(Presencial casting) {
-      
+
         castingDAO.guardar(casting);
-       
-       
+
     }
 
     @Override
@@ -105,19 +97,22 @@ public class FachadaDatos implements IDatos {
 
     @Override
     public Agente buscarAgenteNombre(String nombre) {
-       return agenteDAO.buscarAgenteNombre(nombre);
+        return agenteDAO.buscarAgenteNombre(nombre);
     }
 
     @Override
     public void guardarAgente(Agente agente) {
-      agenteDAO.guardar(agente);
+        agenteDAO.guardar(agente);
     }
 
     @Override
     public List<Presencial> consultarTodosCasting(String nombre, String codigo, Date fecha) {
-      return  castingDAO.consultarTodos(nombre, codigo, fecha);
+        return castingDAO.consultarTodos(nombre, codigo, fecha);
     }
-    
- 
+
+    @Override
+    public List<Perfil> consultarTodosPerfiles() {
+        return perfilDAO.consultarTodos();
+    }
 
 }
