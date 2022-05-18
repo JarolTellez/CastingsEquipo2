@@ -166,17 +166,22 @@ public class PanelTablaCasting extends javax.swing.JPanel {
     private void comboBoxClientesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxClientesItemStateChanged
         CambiarListaSegunClienteSeleccionadoEnElPanel();
     }//GEN-LAST:event_comboBoxClientesItemStateChanged
-    
-    private void CambiarListaSegunClienteSeleccionadoEnElPanel() {
-        if(comboBoxClientes.getSelectedItem().getClass() == String.class){
-            llenarTabla((ArrayList<Casting>) logica.consularTodosCasting());
-        }
-        Cliente cliente = (Cliente) comboBoxClientes.getSelectedItem();
-        if (cliente != null) {
-            List<Casting> castings = logica.consultarCastingCliente(cliente.getId());
-            llenarTabla(castings);
-        }
 
+    private void CambiarListaSegunClienteSeleccionadoEnElPanel() 
+    {
+        Cliente cliente = (Cliente) comboBoxClientes.getSelectedItem();
+        if (cliente != null) 
+        {
+            if (comboBoxClientes.getSelectedItem().getClass() == String.class) 
+            {
+                llenarTabla((ArrayList<Casting>) logica.consularTodosCasting());
+            }
+            if (cliente != null) 
+            {
+                List<Casting> castings = logica.consultarCastingCliente(cliente.getId());
+                llenarTabla(castings);
+            }
+        }
     }
 
     public void mostrarError(Exception ex) {
@@ -190,7 +195,7 @@ public class PanelTablaCasting extends javax.swing.JPanel {
         comboBoxClientes.removeAllItems();
         for (int i = 0; i < clientes.size(); i++) {
             comboBoxClientes.addItem(logica.consultarTodosClientes().get(i));
-            
+
         }
         comboBoxClientes.addItem("Todos");
         ArrayList<Casting> castings = (ArrayList<Casting>) logica.consularTodosCasting();
@@ -199,7 +204,7 @@ public class PanelTablaCasting extends javax.swing.JPanel {
     }
 
     public void llenarTabla(List<Casting> lista) {
-        
+
         List<Casting> list = lista;
         DefaultTableModel model = (DefaultTableModel) tblCastings.getModel();
 
