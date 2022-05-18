@@ -19,6 +19,7 @@ public interface ILogica {
      public void registrarCliente(Cliente cliente);
      public List<Agente> consultarTodosAgentes();
      public List<Cliente> consultarTodosClientes();
+     public List<Perfil> consultarTodosPerfiles();
      public List<Presencial> consultarTodosCasting();
      public List<Presencial> consultarTodosCasting(String nombre,String codigo,Date fecha);
      public Fase consultarFaseFecha();
