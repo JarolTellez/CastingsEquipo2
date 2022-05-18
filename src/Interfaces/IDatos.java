@@ -19,6 +19,7 @@ public interface IDatos {
     public void guardarCliente(Cliente cliente);
     
      public List<Cliente> consultarTodosClientes();
+     public List<Perfil> consultarTodosPerfiles();
      public List<Agente> consultarTodosAgentes();
      public List<Presencial> consultarTodosCastings();
      public List<Presencial> consultarTodosCasting(String nombre,ObjectId  codigo,Date fecha);
