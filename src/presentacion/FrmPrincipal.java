@@ -25,6 +25,7 @@ public class FrmPrincipal extends javax.swing.JFrame {
          
     }
     
+    
     public void despliegaPanelPerfil(){
         panelPrincipal.removeAll();
        panelPrincipal.add(panelTabla.desplegarPanel(),BorderLayout.CENTER);
