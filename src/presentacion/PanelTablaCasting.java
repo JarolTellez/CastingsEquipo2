@@ -138,14 +138,16 @@ public class PanelTablaCasting extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegistrarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarPerfilActionPerformed
-        //  aqui falta la condicion para ver si se selecciono un casting
-        try {
-//            casting.verificaDatos(nombreCliente, nombreAgente, tipoCasting);
-            perfil.desplegarPanel();
-            perfil.recuperarDatos(nombreCliente, nombreAgente, tipoCasting, idCasting);
 
-        } catch (RuntimeException ex) {
-            mostrarError(ex);
+        if (this.idCasting != null) {
+            try {
+//            casting.verificaDatos(nombreCliente, nombreAgente, tipoCasting);
+                perfil.desplegarPanel();
+                perfil.recuperarDatos(nombreCliente, nombreAgente, tipoCasting, idCasting);
+
+            } catch (RuntimeException ex) {
+                mostrarError(ex);
+            }
         }
     }//GEN-LAST:event_btnRegistrarPerfilActionPerformed
 
@@ -167,20 +169,14 @@ public class PanelTablaCasting extends javax.swing.JPanel {
         CambiarListaSegunClienteSeleccionadoEnElPanel();
     }//GEN-LAST:event_comboBoxClientesItemStateChanged
 
-    private void CambiarListaSegunClienteSeleccionadoEnElPanel() 
-    {
+    private void CambiarListaSegunClienteSeleccionadoEnElPanel() {
         Cliente cliente = (Cliente) comboBoxClientes.getSelectedItem();
-        if (cliente != null) 
-        {
-            if (comboBoxClientes.getSelectedItem().getClass() == String.class) 
-            {
+        if (cliente != null) {
+            if (comboBoxClientes.getSelectedItem().getClass() == String.class) {
                 llenarTabla((ArrayList<Casting>) logica.consularTodosCasting());
             }
-            if (cliente != null) 
-            {
-                List<Casting> castings = logica.consultarCastingCliente(cliente.getId());
-                llenarTabla(castings);
-            }
+            List<Casting> castings = logica.consultarCastingCliente(cliente.getId());
+            llenarTabla(castings);
         }
     }
 

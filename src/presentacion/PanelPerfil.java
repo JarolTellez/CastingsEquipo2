@@ -56,12 +56,14 @@ public class PanelPerfil extends javax.swing.JPanel {
 
     public void recuperarDatos(String nombreCliente, String nombreAgente, String tipoCasting, ObjectId id) {
 
-        Casting casting = logica.consultarCastingId(id);
-        this.id = id;
-        txtNombreCliente.setText(nombreCliente);
-        txtNombreAgente.setText(nombreAgente);
-        txtTipoCasting.setText(casting.getTipo());
-        llenarTabla();
+        {
+            Casting casting = logica.consultarCastingId(id);
+            this.id = id;
+            txtNombreCliente.setText(nombreCliente);
+            txtNombreAgente.setText(nombreAgente);
+            txtTipoCasting.setText(casting.getTipo());
+            llenarTabla();
+        }
     }
 
     public void limpiarCampos() {
@@ -330,38 +332,32 @@ public class PanelPerfil extends javax.swing.JPanel {
     }//GEN-LAST:event_txtSexoKeyTyped
 
     private void txtColorPeloKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtColorPeloKeyTyped
-          soloTexto(evt);
+        soloTexto(evt);
     }//GEN-LAST:event_txtColorPeloKeyTyped
 
     private void txtColorOjosKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtColorOjosKeyTyped
         soloTexto(evt);
     }//GEN-LAST:event_txtColorOjosKeyTyped
-         public void soloNumeros(java.awt.event.KeyEvent evt)
-    {
-         char car = evt.getKeyChar();
-        if( Character.isDigit(car) ){
+    public void soloNumeros(java.awt.event.KeyEvent evt) {
+        char car = evt.getKeyChar();
+        if (Character.isDigit(car)) {
 
-}else{
-evt.consume();
-getToolkit().beep();
-}
+        } else {
+            evt.consume();
+            getToolkit().beep();
+        }
     }
-      
-       public void soloTexto(java.awt.event.KeyEvent evt)
-    {
-         char car = evt.getKeyChar();
-        if(Character.isLetter(car)|| car==' ' ){
 
-}else{
-evt.consume();
-getToolkit().beep();
-}
+    public void soloTexto(java.awt.event.KeyEvent evt) {
+        char car = evt.getKeyChar();
+        if (Character.isLetter(car) || car == ' ') {
+
+        } else {
+            evt.consume();
+            getToolkit().beep();
+        }
     }
-       
-     
-    
-    
-    
+
     private void RegistrarPerfil() {
         String colorOjos = txtColorOjos.getText();
         String colorPelo = txtColorPelo.getText();
