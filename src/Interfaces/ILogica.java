@@ -7,6 +7,7 @@ package Interfaces;
 import ObjetoNegocio.*;
 import java.util.Date;
 import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -20,7 +21,7 @@ public interface ILogica {
      public List<Agente> consultarTodosAgentes();
      public List<Cliente> consultarTodosClientes();
      public List<Presencial> consultarTodosCasting();
-     public List<Presencial> consultarTodosCasting(String nombre,String codigo,Date fecha);
+     public List<Presencial> consultarTodosCasting(String nombre,ObjectId  codigo,Date fecha);
      public Fase consultarFaseFecha();
      public void agregarFase();
      public void eliminarFase();

@@ -14,6 +14,7 @@ import ObjetoNegocio.Perfil;
 import ObjetoNegocio.Presencial;
 import java.util.Date;
 import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -114,7 +115,7 @@ public class FachadaDatos implements IDatos {
     }
 
     @Override
-    public List<Presencial> consultarTodosCasting(String nombre, String codigo, Date fecha) {
+    public List<Presencial> consultarTodosCasting(String nombre, ObjectId  codigo, Date fecha) {
       return  castingDAO.consultarTodos(nombre, codigo, fecha);
     }
     

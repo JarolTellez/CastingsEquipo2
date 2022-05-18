@@ -10,6 +10,7 @@ import Interfaces.ILogica;
 import ObjetoNegocio.*;
 import java.util.Date;
 import java.util.List;
+import org.bson.types.ObjectId;
 
 
 /**
@@ -145,7 +146,7 @@ public class FachadaLogica implements ILogica {
     }
 
     @Override
-    public List<Presencial> consultarTodosCasting(String nombre, String codigo, Date fecha) {
+    public List<Presencial> consultarTodosCasting(String nombre, ObjectId  codigo, Date fecha) {
         if(controlCastings.consultarTodosCasting(nombre, codigo, fecha).size()<1)
         {
             throw new RuntimeException("Casting no existente");

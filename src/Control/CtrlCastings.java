@@ -10,6 +10,7 @@ import Interfaces.Implementacion.FachadaDatos;
 import ObjetoNegocio.*;
 import java.util.Date;
 import java.util.List;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -42,7 +43,7 @@ public class CtrlCastings {
     }
     
     
-     public List <Presencial> consultarTodosCasting(String nombre,String codigo,Date fecha)
+     public List <Presencial> consultarTodosCasting(String nombre,ObjectId  codigo,Date fecha)
     {
         return fabricaDatos.consultarTodosCasting(nombre, codigo, fecha);
     }

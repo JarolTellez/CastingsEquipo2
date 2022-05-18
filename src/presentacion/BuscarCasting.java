@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import org.bson.types.ObjectId;
 
 /**
  *
@@ -137,15 +138,28 @@ public class BuscarCasting extends javax.swing.JPanel {
 
      public void buscarCasting() throws ParseException
      {
-         String nombre,codigo;
+         String nombre=null;
+                 ObjectId  codigo = null;
          Date fecha = null;
          
-           //    String  fech = datePicker.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-       // SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
-         
-       // fecha=date.parse(fech);
-         nombre= txtNombre.getText();
-         codigo=txtCodigo.getText();
+     if(datePicker.getDate()!=null)
+     {
+           String  fech = datePicker.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+       SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+       fecha=date.parse(fech);
+             datePicker.clear();
+     }
+ 
+       
+       if(txtNombre.getText().trim().length()>0)
+       {
+         nombre= txtNombre.getText().trim();
+       }
+         if(txtCodigo.getText().trim().length()>0)
+       {
+        
+        codigo= new ObjectId(txtCodigo.getText().trim());
+       }
          try
          {
              
