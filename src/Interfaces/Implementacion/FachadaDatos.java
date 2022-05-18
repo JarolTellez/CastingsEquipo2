@@ -12,8 +12,11 @@ import ObjetoNegocio.Cliente;
 import ObjetoNegocio.Fase;
 import ObjetoNegocio.Perfil;
 import ObjetoNegocio.Presencial;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.bson.types.ObjectId;
 
 /**
@@ -116,7 +119,17 @@ public class FachadaDatos implements IDatos {
 
     @Override
     public List<Presencial> consultarTodosCasting(String nombre, ObjectId  codigo, Date fecha) {
-      return  castingDAO.consultarTodos(nombre, codigo, fecha);
+        try {
+            return  castingDAO.consultarTodos(nombre, codigo, fecha);
+        } catch (ParseException ex) {
+            Logger.getLogger(FachadaDatos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    @Override
+    public List<Perfil> consultarTodosPerfiles() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
  
