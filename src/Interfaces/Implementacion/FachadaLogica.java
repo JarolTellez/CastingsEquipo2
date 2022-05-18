@@ -8,6 +8,7 @@ package Interfaces.Implementacion;
 import Control.*;
 import Interfaces.ILogica;
 import ObjetoNegocio.*;
+import java.util.Date;
 import java.util.List;
 
 
@@ -141,6 +142,17 @@ public class FachadaLogica implements ILogica {
         {
                throw new RuntimeException(ex.getMessage());
         }  
+    }
+
+    @Override
+    public List<Presencial> consultarTodosCasting(String nombre, String codigo, Date fecha) {
+        if(controlCastings.consultarTodosCasting(nombre, codigo, fecha).size()<1)
+        {
+            throw new RuntimeException("Casting no existente");
+        }else
+        {
+            return controlCastings.consultarTodosCasting(nombre, codigo, fecha);
+        }
     }
 
     

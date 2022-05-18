@@ -11,6 +11,7 @@ import ObjetoNegocio.Presencial;
 import com.mongodb.client.MongoCollection;
 import static com.mongodb.client.model.Filters.eq;
 import java.util.ArrayList;
+import java.util.Date;
 import org.bson.types.ObjectId;
 
 /**
@@ -59,5 +60,19 @@ public CastingDAO()
         return coleccionCastings.find(eq("nombre", nombre)).first();
                 
     }
+    
+
+    public ArrayList<Presencial> consultarTodos(String nombre,String codigo,Date fecha) {
+          ArrayList<Presencial> c= new ArrayList<>();
+          if(nombre!=null)
+          {
+        coleccionCastings.find(eq("nombre",nombre)).into(c);
+        
+        
+          }
+     
+        return c;
+    }
+    
     
 }

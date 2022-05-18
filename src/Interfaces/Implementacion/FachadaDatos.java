@@ -17,7 +17,7 @@ import java.util.List;
 
 /**
  *
- * @author ElisaVelasquez
+ * @author Jarol Tellez
  */
 public class FachadaDatos implements IDatos {
 
@@ -111,6 +111,11 @@ public class FachadaDatos implements IDatos {
     @Override
     public void guardarAgente(Agente agente) {
       agenteDAO.guardar(agente);
+    }
+
+    @Override
+    public List<Presencial> consultarTodosCasting(String nombre, String codigo, Date fecha) {
+      return  castingDAO.consultarTodos(nombre, codigo, fecha);
     }
     
  

@@ -8,6 +8,7 @@ package Control;
 import Interfaces.IDatos;
 import Interfaces.Implementacion.FachadaDatos;
 import ObjetoNegocio.*;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,5 +39,11 @@ public class CtrlCastings {
     public List <Presencial> consultarTodosCasting()
     {
         return fabricaDatos.consultarTodosCastings();
+    }
+    
+    
+     public List <Presencial> consultarTodosCasting(String nombre,String codigo,Date fecha)
+    {
+        return fabricaDatos.consultarTodosCasting(nombre, codigo, fecha);
     }
 }

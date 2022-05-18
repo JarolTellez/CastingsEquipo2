@@ -81,7 +81,7 @@ public class Agente {
 
     @Override
     public String toString() {
-        return "id=" + id + ", RFC=" + RFC + ", CURP=" + CURP + ", nombre=" + nombre + ", direccion=" + direccion ;
+        return  " RFC=" + RFC + ", CURP=" + CURP + ", nombre=" + nombre + ", direccion=" + direccion ;
     }
 
 

@@ -20,6 +20,7 @@ public interface IDatos {
      public List<Cliente> consultarTodosClientes();
      public List<Agente> consultarTodosAgentes();
      public List<Presencial> consultarTodosCastings();
+     public List<Presencial> consultarTodosCasting(String nombre,String codigo,Date fecha);
      public Fase buscarFaseFecha(Date fecha);
      public Casting buscarCastingNombre(String nombre);
      public Perfil buscarPerfilCasting();

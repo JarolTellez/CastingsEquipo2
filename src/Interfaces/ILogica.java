@@ -5,6 +5,7 @@
 package Interfaces;
 
 import ObjetoNegocio.*;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,16 +16,17 @@ public interface ILogica {
     
    
     
-    public void registrarCliente(Cliente cliente);
-    public List<Agente> consultarTodosAgentes();
+     public void registrarCliente(Cliente cliente);
+     public List<Agente> consultarTodosAgentes();
      public List<Cliente> consultarTodosClientes();
      public List<Presencial> consultarTodosCasting();
+     public List<Presencial> consultarTodosCasting(String nombre,String codigo,Date fecha);
      public Fase consultarFaseFecha();
      public void agregarFase();
      public void eliminarFase();
      public void guardarCasting(Presencial Casting);
      public void guardarPerfil(Perfil perfil);
-      public Cliente consultarPorNombre(String nombre);
-        public Casting consultarCastingNombre(String nombre);
-        public void registrarAgente(Agente agente);
+     public Cliente consultarPorNombre(String nombre);
+     public Casting consultarCastingNombre(String nombre);
+     public void registrarAgente(Agente agente);
 }

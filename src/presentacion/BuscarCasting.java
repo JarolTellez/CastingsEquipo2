@@ -5,7 +5,20 @@
  */
 package presentacion;
 
+import Interfaces.ILogica;
+import static Interfaces.Implementacion.FabricaLogica.dameInstancia;
+import ObjetoNegocio.Presencial;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import static java.util.Collections.list;
+import java.util.Date;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -13,11 +26,14 @@ import javax.swing.JPanel;
  */
 public class BuscarCasting extends javax.swing.JPanel {
 
+       ILogica logica;
+   
     /**
      * Creates new form BuscarCasting
      */
     public BuscarCasting() {
         initComponents();
+        logica= dameInstancia();
     }
 
     
@@ -42,22 +58,12 @@ public class BuscarCasting extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
+        txtCodigo = new javax.swing.JTextField();
+        btnBuscar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblCastings = new javax.swing.JTable();
+        datePicker = new com.github.lgooddatepicker.components.DatePicker();
 
         fondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -69,36 +75,44 @@ public class BuscarCasting extends javax.swing.JPanel {
 
         jLabel3.setText("Fecha contratación:");
         fondo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 40, -1, -1));
-        fondo.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 160, -1));
-        fondo.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, 170, -1));
-        fondo.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 40, 190, -1));
+        fondo.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 160, -1));
+        fondo.add(txtCodigo, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 40, 170, -1));
 
-        jLabel4.setText("código:");
-        fondo.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 170, -1, -1));
+        btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        fondo.add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 100, -1, -1));
 
-        jLabel5.setText("Nombre:");
-        fondo.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 220, -1, -1));
+        tblCastings.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        jLabel6.setText("Descripción:");
-        fondo.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 270, -1, -1));
+            },
+            new String [] {
+                "ID", "Nombre", "Descripción", "Fecha contratación", "Coste", "Tipo", "Cliente", "Agente"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
 
-        jLabel7.setText("Fecha contratación:");
-        fondo.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 320, -1, -1));
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
-        jLabel8.setText("Coste:");
-        fondo.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 370, -1, -1));
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblCastings);
 
-        jButton1.setText("Buscar");
-        fondo.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 100, -1, -1));
-
-        jLabel9.setText("Numero personas:");
-        fondo.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 420, -1, 20));
-        fondo.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 320, 210, -1));
-        fondo.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 170, 210, -1));
-        fondo.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 420, 140, -1));
-        fondo.add(jTextField7, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 270, 210, -1));
-        fondo.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 220, 210, -1));
-        fondo.add(jTextField9, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 370, 140, -1));
+        fondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 870, 270));
+        fondo.add(datePicker, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 40, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -112,27 +126,78 @@ public class BuscarCasting extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+           try {
+               buscarCasting();
+           } catch (ParseException ex) {
+               Logger.getLogger(BuscarCasting.class.getName()).log(Level.SEVERE, null, ex);
+           }
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
+
+     public void buscarCasting() throws ParseException
+     {
+         String nombre,codigo;
+         Date fecha = null;
+         
+           //    String  fech = datePicker.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+       // SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
+         
+       // fecha=date.parse(fech);
+         nombre= txtNombre.getText();
+         codigo=txtCodigo.getText();
+         try
+         {
+             
+       llenarTabla( logica.consultarTodosCasting(nombre, codigo, fecha));
+         }catch(RuntimeException ex)
+         {
+             mostrarError(ex);
+         }
+     }
+     
+     public void mostrarError(RuntimeException ex)
+     {
+        JOptionPane.showMessageDialog(this, ex.getMessage(),"Error",JOptionPane.ERROR_MESSAGE);
+     }
+     
+     
+     public void llenarTabla(List<Presencial> list) throws ParseException
+     {
+        
+        DefaultTableModel model= (DefaultTableModel) tblCastings.getModel();
+ 
+        int rowCount = model.getRowCount();
+        
+        for(int m=rowCount-1;m>=0;m--)
+        {
+           model.removeRow(m);
+        }
+        
+        Object rowData[]=new Object[8];
+        for(int i=0; i<list.size();i++){
+            rowData[0]=list.get(i).getId();
+            rowData[1]=list.get(i).getNombre();
+            rowData[2]=list.get(i).getDescripcion();
+            rowData[3]=list.get(i).getFecha_contratacion();
+             rowData[4]=list.get(i).getCoste();
+              rowData[5]=list.get(i).getTipo();
+               rowData[6]=list.get(i).getCliente();
+                  rowData[7]=list.get(i).getAgente();
+            model.addRow(rowData);
+        }
+     }
+     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
+    private com.github.lgooddatepicker.components.DatePicker datePicker;
     private javax.swing.JPanel fondo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblCastings;
+    private javax.swing.JTextField txtCodigo;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }
