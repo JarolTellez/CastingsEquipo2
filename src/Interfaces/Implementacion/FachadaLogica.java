@@ -183,6 +183,12 @@ public class FachadaLogica implements ILogica {
     ctrPerfil.guardarPerfilconIdDeCasting(perfil,id);
     }
 
+    @Override
+    public boolean existenClientes() {
+        
+        return controlClientes.existenClientes();
+     }
+
    
 
     

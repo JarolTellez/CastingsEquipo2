@@ -61,4 +61,8 @@ public class CtrClientes {
    public Cliente consultarPorCastingNombre(String nombreCasting) {
         return fabricaDatos.consultarPorCastingNombre(nombreCasting);
     }
+
+    public boolean existenClientes() {
+        return fabricaDatos.existenClientes();
+       }
 }

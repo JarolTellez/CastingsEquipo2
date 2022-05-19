@@ -94,24 +94,23 @@ public class FachadaDatos implements IDatos {
 
     @Override
     public void ActualizarCliene(Object Casting, Cliente cliente) {
-     
+
         //validar que tipo es
         Casting castin = (Casting) Casting;
         //verificar cliente dueno
-   if(clienteDao.consultarPorCastingNombre(castin.getNombre())==null)
-   {
-        if (castin.getTipo().equals("Presencial")) {
-            Casting presencial = (Casting) Casting;
-            cliente.getCastings().add(presencial);
+        if (clienteDao.consultarPorCastingNombre(castin.getNombre()) == null) {
+            if (castin.getTipo().equals("Presencial")) {
+                Casting presencial = (Casting) Casting;
+                cliente.getCastings().add(presencial);
 
+            } else {
+                Casting online = (Casting) Casting;
+                cliente.getCastings().add(online);
+            }
+
+            clienteDao.actualizar(cliente, cliente.getId());
         } else {
-            Casting online = (Casting) Casting;
-            cliente.getCastings().add(online);
         }
-
-        clienteDao.actualizar(cliente, cliente.getId());
-   }else
-   {}
 
     }
 
@@ -239,8 +238,15 @@ public class FachadaDatos implements IDatos {
 
     @Override
     public Cliente consultarPorCastingNombre(String nombreCasting) {
-        
+
         return clienteDao.consultarPorCastingNombre(nombreCasting);
     }
-    
+
+    @Override
+    public boolean existenClientes() {
+        boolean confirmmacion= false;
+       confirmmacion = (clienteDao.consultarTodos().size() < 1)? false : true;
+       return confirmmacion;
+    }
+
 }

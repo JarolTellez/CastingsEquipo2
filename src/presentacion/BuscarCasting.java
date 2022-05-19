@@ -110,7 +110,7 @@ public class BuscarCasting extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblCastings);
 
         fondo.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 140, 870, 270));
-        fondo.add(datePicker, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 30, -1, -1));
+        fondo.add(datePicker, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 40, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

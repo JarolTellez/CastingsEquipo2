@@ -41,9 +41,8 @@ public interface IDatos {
     public void ActualizarCliene(Object Casting, Cliente cliente);
 
     public Cliente buscarClienteporId(ObjectId id);
-    
-    public Cliente consultarPorCastingNombre(String nombreCasting);
 
+    public Cliente consultarPorCastingNombre(String nombreCasting);
 
     public List<Casting> consultarTodosCastings();
 
@@ -60,5 +59,7 @@ public interface IDatos {
     public List<Casting> consultarTodosCasting(String nombre, ObjectId codigo, Date fecha);
 
     public void guardarPerfilconIdDeCasting(Perfil perfil, ObjectId id);
+
+    public boolean existenClientes();
 
 }

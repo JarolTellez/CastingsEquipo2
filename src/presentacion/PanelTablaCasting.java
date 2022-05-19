@@ -36,12 +36,13 @@ public class PanelTablaCasting extends javax.swing.JPanel {
      */
     public PanelTablaCasting() {
         initComponents();
+        this.idCasting = null;
         logica = dameInstancia();
         llenarTabla((ArrayList<Casting>) logica.consularTodosCasting());
     }
 
     public JPanel desplegarPanel() {
-
+        this.idCasting = null;
         this.setSize(1090, 590);// tamano del panel
         this.setLocation(5, 5);// posicion dentro del panel principal
         llenarTabla((ArrayList<Casting>) logica.consularTodosCasting());
@@ -64,7 +65,7 @@ public class PanelTablaCasting extends javax.swing.JPanel {
         tblCastings = new javax.swing.JTable();
         btnRegistrarPerfil = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        comboBoxClientes = new javax.swing.JComboBox<>();
+        comboBoxClientes = new javax.swing.JComboBox<Object>();
         jLabel2 = new javax.swing.JLabel();
 
         fondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -133,7 +134,7 @@ public class PanelTablaCasting extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(fondo, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -148,6 +149,8 @@ public class PanelTablaCasting extends javax.swing.JPanel {
             } catch (RuntimeException ex) {
                 mostrarError(ex);
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione un casting al que asignarle un perfil", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnRegistrarPerfilActionPerformed
 
@@ -170,11 +173,17 @@ public class PanelTablaCasting extends javax.swing.JPanel {
     }//GEN-LAST:event_comboBoxClientesItemStateChanged
 
     private void CambiarListaSegunClienteSeleccionadoEnElPanel() {
-        Cliente cliente = (Cliente) comboBoxClientes.getSelectedItem();
-        if (cliente != null) {
-            if (comboBoxClientes.getSelectedItem().getClass() == String.class) {
+        Object SelectedObject = comboBoxClientes.getSelectedItem();
+        if (SelectedObject != null) {
+            if (SelectedObject.getClass() == String.class) {
                 llenarTabla((ArrayList<Casting>) logica.consularTodosCasting());
+                return;
             }
+        }//Muevele cuando lleges te ando viendo
+        
+        Cliente cliente = (Cliente) SelectedObject;
+        if (cliente != null) {
+
             List<Casting> castings = logica.consultarCastingCliente(cliente.getId());
             llenarTabla(castings);
         }

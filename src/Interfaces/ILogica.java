@@ -62,4 +62,6 @@ public interface ILogica {
 
     public void guardarPerfilconIdDeCasting(Perfil perfil, ObjectId id);
 
+    public boolean existenClientes();
+
 }

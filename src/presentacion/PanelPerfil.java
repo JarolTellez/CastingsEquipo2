@@ -42,7 +42,6 @@ public class PanelPerfil extends javax.swing.JPanel {
     }
 
     public void desplegarPanel() {
-
         this.setSize(1090, 590);// tamano del panel
         this.setLocation(5, 5);// posicion dentro del panel principal
         llenarComboBoxes();
@@ -55,26 +54,23 @@ public class PanelPerfil extends javax.swing.JPanel {
     }
 
     public void recuperarDatos(String nombreCliente, String nombreAgente, String tipoCasting, ObjectId id) {
-
-        {
-            Casting casting = logica.consultarCastingId(id);
-            this.id = id;
-            txtNombreCliente.setText(nombreCliente);
-            txtNombreAgente.setText(nombreAgente);
-            txtTipoCasting.setText(casting.getTipo());
-            llenarTabla();
+        
+                Casting casting = logica.consultarCastingId(id);
+                this.id = id;
+                txtNombreCliente.setText(nombreCliente);
+                txtNombreAgente.setText(nombreAgente);
+                txtTipoCasting.setText(casting.getTipo());
+                llenarTabla();
         }
-    }
+    
 
     public void limpiarCampos() {
-        txtNombreCliente.setText("");
-        txtNombreAgente.setText("");
         txtSexo.setText("");
         txtColorPelo.setText("");
         txtColorOjos.setText("");
         cbbExperiencia.setSelectedIndex(-1);
-        txtTipoCasting.setText("");
         grupoEspecialidad.clearSelection();
+        comboBoxEstado.setSelectedIndex(-1);
         cbbExperiencia.setSelectedIndex(-1);
         comboBoxEdad.setSelectedIndex(-1);
         comboBoxAltura.setSelectedIndex(-1);
@@ -406,13 +402,14 @@ public class PanelPerfil extends javax.swing.JPanel {
         }
 
         logica.guardarPerfilconIdDeCasting(perfil, this.id);
-
+        
         mostrarMensajeExito(perfil);
 
     }
 
     public void mostrarMensajeExito(Perfil perfil) {
         JOptionPane.showMessageDialog(this, "Registrado con exito casting:" + perfil.getId().toString());
+        limpiarCampos();
         llenarTabla();
         //llenarTabla((ArrayList<Casting>) logica.consularTodosCasting());
     }
