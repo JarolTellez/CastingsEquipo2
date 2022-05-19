@@ -61,9 +61,17 @@ public class PanelCasting extends javax.swing.JPanel {
         comboBoxAgentes.removeAllItems();
 
         List<Cliente> clientes = logica.consultarTodosClientes();
+        List<Agente> agentes = logica.consultarTodosAgentes();
+        if (agentes.size() < 1) {
+            tipoPresencial.setEnabled(false);
+            tipoEnLinea.setSelected(true);
+            esconderCampos();
 
-        for (Agente agente : logica.consultarTodosAgentes()) {
-            comboBoxAgentes.addItem(agente);
+            JOptionPane.showMessageDialog(this, "No hay agentes disponibles para generar un casting presencial.");
+        } else {
+            for (Agente agente : agentes) {
+                comboBoxAgentes.addItem(agente);
+            }
         }
         comboBoxClientes.removeAllItems();
         for (int i = 0; i < clientes.size(); i++) {
@@ -380,7 +388,7 @@ public class PanelCasting extends javax.swing.JPanel {
                     tipo = tipoEnLinea.getText();
                     Casting castingOnline = new Casting(
                             new ObjectId(),
-                             txtNombre.getText().toUpperCase().charAt(0) + txtNombre.getText().substring(1, txtNombre.getText().length()).toLowerCase(),
+                            txtNombre.getText().toUpperCase().charAt(0) + txtNombre.getText().substring(1, txtNombre.getText().length()).toLowerCase(),
                             txtDescripcion.getText(),
                             convertToDateUsingDate(datePickerFecha.getDate()),
                             Float.parseFloat(txtCoste.getText()),
@@ -396,30 +404,33 @@ public class PanelCasting extends javax.swing.JPanel {
                 }
 
             } else if (tipoPresencial.isSelected()) {
-                //obtenerFases();
-                List<PruebaIndividual> listaPruebas = new ArrayList<>();
-                tipo = tipoPresencial.getText();
-                Casting casPresencial = new Casting(
-                        new ObjectId(),
-                         txtNombre.getText().toUpperCase().charAt(0) + txtNombre.getText().substring(1, txtNombre.getText().length()).toLowerCase(),
-                        txtDescripcion.getText(),
-                        convertToDateUsingDate(datePickerFecha.getDate()),
-                        Float.parseFloat(txtCoste.getText()),
-                        tipo,
-                        p,
-                        c,
-                        cliente.getId(),
-                        Integer.parseInt(txtNumeroPersonas.getText()),
-                        (Agente) comboBoxAgentes.getSelectedItem(),
-                        fasesAgregadas,
-                        listaPruebas);
 
-                logica.guardarCasting(casPresencial, cliente);
-                mostrarMensajeExito(casPresencial);
+                if (comboBoxAgentes.getSelectedItem() != null) {
+                    List<PruebaIndividual> listaPruebas = new ArrayList<>();
+                    tipo = tipoPresencial.getText();
+                    Casting casPresencial = new Casting(
+                            new ObjectId(),
+                            txtNombre.getText().toUpperCase().charAt(0) + txtNombre.getText().substring(1, txtNombre.getText().length()).toLowerCase(),
+                            txtDescripcion.getText(),
+                            convertToDateUsingDate(datePickerFecha.getDate()),
+                            Float.parseFloat(txtCoste.getText()),
+                            tipo,
+                            p,
+                            c,
+                            cliente.getId(),
+                            Integer.parseInt(txtNumeroPersonas.getText()),
+                            (Agente) comboBoxAgentes.getSelectedItem(),
+                            fasesAgregadas,
+                            listaPruebas);
+
+                    logica.guardarCasting(casPresencial, cliente);
+                    mostrarMensajeExito(casPresencial);
+                }
             }
         } catch (Exception e) {
             mostrarError(e);
         }
+
     }//GEN-LAST:event_btnRegistrarCastingActionPerformed
     private Date convertToDateUsingDate(LocalDate date) {
         return java.sql.Date.valueOf(date);
@@ -459,40 +470,35 @@ public class PanelCasting extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnAgregarFaseActionPerformed
 
-    
-    
-      public void soloNumeros(java.awt.event.KeyEvent evt)
-    {
-         char car = evt.getKeyChar();
-        if( Character.isDigit(car) ){
+    public void soloNumeros(java.awt.event.KeyEvent evt) {
+        char car = evt.getKeyChar();
+        if (Character.isDigit(car)) {
 
-}else{
-evt.consume();
-getToolkit().beep();
-}
+        } else {
+            evt.consume();
+            getToolkit().beep();
+        }
     }
-      
-       public void soloTexto(java.awt.event.KeyEvent evt)
-    {
-         char car = evt.getKeyChar();
-        if(Character.isLetter(car)|| car==' ' ){
 
-}else{
-evt.consume();
-getToolkit().beep();
-}
+    public void soloTexto(java.awt.event.KeyEvent evt) {
+        char car = evt.getKeyChar();
+        if (Character.isLetter(car) || car == ' ') {
+
+        } else {
+            evt.consume();
+            getToolkit().beep();
+        }
     }
-       
-        public void numeroDecimal(java.awt.event.KeyEvent evt)
-    {
-         char car = evt.getKeyChar();
 
-        if( Character.isDigit(car) || car=='.'){
+    public void numeroDecimal(java.awt.event.KeyEvent evt) {
+        char car = evt.getKeyChar();
 
-}else{
-evt.consume();
-getToolkit().beep();
-}
+        if (Character.isDigit(car) || car == '.') {
+
+        } else {
+            evt.consume();
+            getToolkit().beep();
+        }
     }
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -540,7 +546,7 @@ getToolkit().beep();
     }//GEN-LAST:event_txtNumeroPersonasKeyTyped
 
     private void txtCosteKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCosteKeyTyped
-      numeroDecimal(evt);
+        numeroDecimal(evt);
     }//GEN-LAST:event_txtCosteKeyTyped
     private void CambiarListaSegunClienteSeleccionadoEnElPanel() {
         Cliente cliente = (Cliente) comboBoxClientes.getSelectedItem();
